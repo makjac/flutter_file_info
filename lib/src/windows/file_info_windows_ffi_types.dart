@@ -47,4 +47,9 @@ class FileInfoWindowsFfiTypesImpl implements FileInfoWindowsFfiTypes {
   int getDC(int hwnd) {
     return GetDC(hwnd);
   }
+
+  @override
+  int destroyIcon(int hIcon) {
+    return DestroyIcon(hIcon);
+  }
 }
