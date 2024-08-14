@@ -7,9 +7,16 @@ import 'package:equatable/equatable.dart';
 /// This class is used to encapsulate data extracted from an icon, providing a convenient
 /// way to access and manipulate icon information.
 class IconInfo extends Equatable {
+  /// The width of the icon in pixels.
   final int width;
+
+  /// The height of the icon in pixels.
   final int height;
+
+  /// The color depth of the icon, indicating the number of bits per pixel.
   final int colorDepth;
+
+  /// A Uint8List representing the pixel data of the icon.
   final Uint8List pixelData;
   const IconInfo({
     required this.width,
