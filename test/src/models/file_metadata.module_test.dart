@@ -27,5 +27,34 @@ void main() {
       expect(fileInfo.fileSize, '1 KB');
     });
 
+    test('FileInfo copyWith creates a new instance with updated values', () {
+      final fileInfo = FileMetadata(
+        filePath: 'C:/test/file.txt',
+        fileName: 'file.txt',
+        fileExtension: '.txt',
+        fileType: 'Text Document',
+        creationTime: DateTime(2023, 8, 10),
+        modifiedTime: DateTime(2023, 8, 12),
+        accessedTime: DateTime(2023, 8, 13),
+        sizeBytes: 1024,
+        fileSize: '1 KB',
+      );
+
+      final updatedFileInfo = fileInfo.copyWith(
+        fileName: 'new_file.txt',
+        sizeBytes: 2048,
+      );
+
+      expect(updatedFileInfo.filePath, 'C:/test/file.txt');
+      expect(updatedFileInfo.fileName, 'new_file.txt');
+      expect(updatedFileInfo.fileExtension, '.txt');
+      expect(updatedFileInfo.fileType, 'Text Document');
+      expect(updatedFileInfo.creationTime, DateTime(2023, 8, 10));
+      expect(updatedFileInfo.modifiedTime, DateTime(2023, 8, 12));
+      expect(updatedFileInfo.accessedTime, DateTime(2023, 8, 13));
+      expect(updatedFileInfo.sizeBytes, 2048);
+      expect(updatedFileInfo.fileSize, '1 KB');
+    });
+
   });
 }
