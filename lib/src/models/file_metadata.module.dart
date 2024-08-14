@@ -40,6 +40,8 @@ class FileMetadata extends Equatable {
     this.sizeBytes,
     this.fileSize,
   });
+
+  /// Returns a string representation of the [FileMetadata] object.
   @override
   String toString() => 'FileInfo('
       'filePath: $filePath, '
