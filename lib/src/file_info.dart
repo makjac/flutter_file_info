@@ -17,6 +17,8 @@ abstract class FileInfo extends PlatformInterface {
 
   Future<IconInfo?> getFileIconInfo(String filePath) =>
       throw UnimplementedError('getFileIconInfo() has not been implemented.');
+  Future<FileMetadata?> getFileInfo(String filePath) =>
+      throw UnimplementedError('getFileInfo() has not been implemented.');
 }
 
 class _DefaultFileInfo extends FileInfo {
