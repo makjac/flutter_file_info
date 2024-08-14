@@ -57,5 +57,35 @@ void main() {
         'IconInfo(width: 32, height: 32, colorDepth: 24, pixelData: $pixelData)',
       );
     });
+
+    test('IconInfo equality comparison works correctly', () {
+      final pixelData1 = Uint8List.fromList([0, 1, 2, 3, 4]);
+      final pixelData2 = Uint8List.fromList([0, 1, 2, 3, 4]);
+      final pixelData3 = Uint8List.fromList([5, 6, 7, 8, 9]);
+
+      final iconInfo1 = IconInfo(
+        width: 32,
+        height: 32,
+        colorDepth: 24,
+        pixelData: pixelData1,
+      );
+
+      final iconInfo2 = IconInfo(
+        width: 32,
+        height: 32,
+        colorDepth: 24,
+        pixelData: pixelData2,
+      );
+
+      final iconInfo3 = IconInfo(
+        width: 64,
+        height: 32,
+        colorDepth: 24,
+        pixelData: pixelData3,
+      );
+
+      expect(iconInfo1, equals(iconInfo2));
+      expect(iconInfo1, isNot(equals(iconInfo3)));
+    });
   });
 }
