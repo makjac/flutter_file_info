@@ -23,3 +23,6 @@ abstract class FileInfoWindowsFfiTypes {
 
   int destroyIcon(int hIcon);
 }
+
+class FileInfoWindowsFfiTypesImpl implements FileInfoWindowsFfiTypes {
+}
