@@ -20,4 +20,9 @@ abstract class FileInfo extends PlatformInterface {
 }
 
 class _DefaultFileInfo extends FileInfo {
+  @override
+  Future<IconInfo?> getFileIconInfo(String filePath) {
+    throw UnimplementedError(
+        'Platform interface has not been implemented for this platform.');
+  }
 }
