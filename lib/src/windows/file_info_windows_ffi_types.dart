@@ -18,4 +18,6 @@ abstract class FileInfoWindowsFfiTypes {
     Pointer<BITMAPINFO> lpbi,
     int uUsage,
   );
+
+  int getDC(int hwnd);
 }
