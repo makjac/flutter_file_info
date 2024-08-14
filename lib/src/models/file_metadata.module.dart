@@ -28,6 +28,7 @@ class FileMetadata extends Equatable {
   /// The size of the file formatted as a human-readable string, e.g., '1.5 GB'.
   final String? fileSize;
 
+  /// Creates a new instance of [FileMetadata] with the specified parameters.
   const FileMetadata({
     required this.filePath,
     this.fileName,
