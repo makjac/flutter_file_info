@@ -16,4 +16,25 @@ class FileInfoWindows extends FileInfo {
   static void registerWith() {
     FileInfo.instance = FileInfoWindows();
   }
+
+  Future<Pointer<SHFILEINFO>> _getFileIconInfo(String filePath) async {
+    final Pointer<SHFILEINFO> fileInfo = calloc<SHFILEINFO>();
+
+    try {
+      _iconExtractor.shGetFileInfo(
+        filePath.toNativeUtf16(),
+        FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_DIRECTORY,
+        fileInfo,
+        sizeOf<SHFILEINFO>(),
+        SHGFI_FLAGS.SHGFI_ICON |
+            SHGFI_FLAGS.SHGFI_SYSICONINDEX |
+            SHGFI_FLAGS.SHGFI_SHELLICONSIZE |
+            SHGFI_FLAGS.SHGFI_LARGEICON,
+      );
+      return fileInfo;
+    } catch (e) {
+      calloc.free(fileInfo);
+      rethrow;
+    }
+  }
 }
