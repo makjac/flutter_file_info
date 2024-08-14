@@ -27,4 +27,10 @@ class _DefaultFileInfo extends FileInfo {
     throw UnimplementedError(
         'Platform interface has not been implemented for this platform.');
   }
+
+  @override
+  Future<FileMetadata?> getFileInfo(String filePath) {
+    throw UnimplementedError(
+        'Platform interface has not been implemented for this platform.');
+  }
 }
