@@ -34,6 +34,29 @@ class FileMetadata extends Equatable {
       'accessedTime: $accessedTime, '
       'sizeBytes: $sizeBytes, '
       'fileSize: $fileSize)';
+  FileMetadata copyWith({
+    String? filePath,
+    String? fileName,
+    String? fileExtension,
+    String? fileType,
+    DateTime? creationTime,
+    DateTime? modifiedTime,
+    DateTime? accessedTime,
+    int? sizeBytes,
+    String? fileSize,
+  }) {
+    return FileMetadata(
+      filePath: filePath ?? this.filePath,
+      fileName: fileName ?? this.fileName,
+      fileExtension: fileExtension ?? this.fileExtension,
+      fileType: fileType ?? this.fileType,
+      creationTime: creationTime ?? this.creationTime,
+      modifiedTime: modifiedTime ?? this.modifiedTime,
+      accessedTime: accessedTime ?? this.accessedTime,
+      sizeBytes: sizeBytes ?? this.sizeBytes,
+      fileSize: fileSize ?? this.fileSize,
+    );
+  }
   @override
   List<Object?> get props => [
         filePath,
