@@ -43,5 +43,21 @@ void main() {
       calloc.free(mockFilePath);
       calloc.free(mockFileInfo);
     });
+
+    test('should return null when SHGetFileInfo fails', () async {
+      const filePath = 'path/to/file';
+
+      final Pointer<Utf16> mockFilePath = filePath.toNativeUtf16();
+      final Pointer<SHFILEINFO> mockFileInfo = calloc<SHFILEINFO>();
+
+      when(mockExtractor.shGetFileInfo(any, any, any, any, any)).thenReturn(0);
+
+      final result = await tService.getFileIconInfo(filePath);
+
+      expect(result, isNull);
+
+      calloc.free(mockFilePath);
+      calloc.free(mockFileInfo);
+    });
   });
 }
