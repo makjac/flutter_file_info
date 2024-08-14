@@ -8,4 +8,14 @@ abstract class FileInfoWindowsFfiTypes {
       Pointer<SHFILEINFO> fileInfo, int fileInfoSize, int flags);
 
   int getIconInfo(int hIcon, Pointer<ICONINFO> piconinfo);
+
+  int getDIBits(
+    int hdc,
+    int hbmp,
+    int uStartScan,
+    int cScanLines,
+    Pointer lpvBits,
+    Pointer<BITMAPINFO> lpbi,
+    int uUsage,
+  );
 }
