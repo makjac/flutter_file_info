@@ -18,6 +18,10 @@ class IconInfo extends Equatable {
 
   /// A Uint8List representing the pixel data of the icon.
   final Uint8List pixelData;
+
+  /// Creates an instance of the [IconInfo] class with the specified parameters.
+  ///
+  /// The [width], [height], [colorDepth], and [pixelData] parameters are required.
   const IconInfo({
     required this.width,
     required this.height,
