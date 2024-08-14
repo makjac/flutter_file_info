@@ -12,4 +12,8 @@ class FileInfoWindows extends FileInfo {
       : _iconExtractor = iconExtractor ?? FileInfoWindowsFfiTypesImpl();
 
   final FileInfoWindowsFfiTypes _iconExtractor;
+
+  static void registerWith() {
+    FileInfo.instance = FileInfoWindows();
+  }
 }
