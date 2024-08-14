@@ -53,6 +53,10 @@ class FileMetadata extends Equatable {
       'accessedTime: $accessedTime, '
       'sizeBytes: $sizeBytes, '
       'fileSize: $fileSize)';
+
+  /// Creates a new [FileMetadata] object with updated values based on the provided parameters.
+  ///
+  /// Use this method to create a new [FileMetadata] instance with specific fields modified while keeping the original values for the rest.
   FileMetadata copyWith({
     String? filePath,
     String? fileName,
