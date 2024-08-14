@@ -24,6 +24,17 @@ class FileMetadata extends Equatable {
     this.fileSize,
   });
   @override
+  String toString() => 'FileInfo('
+      'filePath: $filePath, '
+      'fileName: $fileName, '
+      'fileExtension: $fileExtension, '
+      'fileType: $fileType, '
+      'creationTime: $creationTime, '
+      'modifiedTime: $modifiedTime, '
+      'accessedTime: $accessedTime, '
+      'sizeBytes: $sizeBytes, '
+      'fileSize: $fileSize)';
+  @override
   List<Object?> get props => [
         filePath,
         fileName,
