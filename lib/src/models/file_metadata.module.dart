@@ -1,15 +1,31 @@
 import 'package:equatable/equatable.dart';
 
 class FileMetadata extends Equatable {
+  /// The full path of the file.
   final String filePath;
+
+  /// The name of the file (excluding the path).
   final String? fileName;
+
+  /// The extension of the file.
   final String? fileExtension;
+
+  /// The type of the file, such as 'Text Document' or 'Image File'.
   final String? fileType;
+
+  /// The [DateTime] when the file was created.
   final DateTime? creationTime;
+
+  /// The [DateTime] when the file was last modified.
   final DateTime? modifiedTime;
+
+  /// The [DateTime] when the file was last accessed.
   final DateTime? accessedTime;
+
+  /// The size of the file in bytes.
   final int? sizeBytes;
 
+  /// The size of the file formatted as a human-readable string, e.g., '1.5 GB'.
   final String? fileSize;
 
   const FileMetadata({
