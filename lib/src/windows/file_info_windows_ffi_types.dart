@@ -42,4 +42,9 @@ class FileInfoWindowsFfiTypesImpl implements FileInfoWindowsFfiTypes {
       Pointer lpvBits, Pointer<BITMAPINFO> lpbi, int uUsage) {
     return GetDIBits(hdc, hbmp, uStartScan, cScanLines, lpvBits, lpbi, uUsage);
   }
+
+  @override
+  int getDC(int hwnd) {
+    return GetDC(hwnd);
+  }
 }
