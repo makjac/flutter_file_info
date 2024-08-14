@@ -31,4 +31,9 @@ class FileInfoWindowsFfiTypesImpl implements FileInfoWindowsFfiTypes {
     return SHGetFileInfo(
         filePath, fileAttributes, fileInfo, fileInfoSize, flags);
   }
+
+  @override
+  int getIconInfo(int hIcon, Pointer<ICONINFO> piconinfo) {
+    return GetIconInfo(hIcon, piconinfo);
+  }
 }
