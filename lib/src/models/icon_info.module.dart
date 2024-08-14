@@ -28,6 +28,10 @@ class IconInfo extends Equatable {
     required this.colorDepth,
     required this.pixelData,
   });
+
+  /// Generates a human-readable string representation of the [IconInfo] object.
+  ///
+  /// The string includes information about the icon's width, height, color depth, and pixel data.
   @override
   String toString() {
     return 'IconInfo(width: $width, height: $height, colorDepth: $colorDepth, pixelData: $pixelData)';
