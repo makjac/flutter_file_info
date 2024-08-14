@@ -80,6 +80,8 @@ class FileMetadata extends Equatable {
       fileSize: fileSize ?? this.fileSize,
     );
   }
+
+  /// Returns a list of properties of the [FileMetadata] object used for equality comparison.
   @override
   List<Object?> get props => [
         filePath,
