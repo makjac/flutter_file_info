@@ -36,6 +36,16 @@ class IconInfo extends Equatable {
   String toString() {
     return 'IconInfo(width: $width, height: $height, colorDepth: $colorDepth, pixelData: $pixelData)';
   }
+
+  /// Creates a copy of the [IconInfo] object with optional modifications to its properties.
+  ///
+  /// Parameters:
+  ///   - `width`: New width for the copied icon (defaults to the original width if not provided).
+  ///   - `height`: New height for the copied icon (defaults to the original height if not provided).
+  ///   - `colorDepth`: New color depth for the copied icon (defaults to the original color depth if not provided).
+  ///   - `pixelData`: New pixel data for the copied icon (defaults to the original pixel data if not provided).
+  ///
+  /// Returns a new [IconInfo] object with the specified modifications.
   copyWith({
     int? width,
     int? height,
