@@ -25,4 +25,10 @@ abstract class FileInfoWindowsFfiTypes {
 }
 
 class FileInfoWindowsFfiTypesImpl implements FileInfoWindowsFfiTypes {
+  @override
+  int shGetFileInfo(Pointer<Utf16> filePath, int fileAttributes,
+      Pointer<SHFILEINFO> fileInfo, int fileInfoSize, int flags) {
+    return SHGetFileInfo(
+        filePath, fileAttributes, fileInfo, fileInfoSize, flags);
+  }
 }
