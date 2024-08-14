@@ -71,4 +71,43 @@ class FileInfoWindows extends FileInfo {
       rethrow;
     }
   }
+
+  Future<Uint8List> _getPixelData(
+      int hbmColor, Pointer<BITMAPINFO> pBitmapInfo) async {
+    final int bitmapSize = pBitmapInfo.ref.bmiHeader.biSizeImage;
+    final biHeight = pBitmapInfo.ref.bmiHeader.biHeight;
+    final isTopDownDIB = biHeight < 0;
+    final height = isTopDownDIB ? -biHeight : biHeight;
+    final lpvBits = calloc<Uint8>(bitmapSize);
+
+    try {
+      final hdcScreen = _iconExtractor.getDC(NULL);
+      _iconExtractor.getDIBits(
+        hdcScreen,
+        hbmColor,
+        0,
+        height,
+        lpvBits,
+        pBitmapInfo,
+        DIB_USAGE.DIB_RGB_COLORS,
+      );
+
+      // Reverse the image if required
+      final rowSize = pBitmapInfo.ref.bmiHeader.biWidth *
+          (pBitmapInfo.ref.bmiHeader.biBitCount / 8).ceil();
+      for (var i = 0; i < height ~/ 2; i++) {
+        final startIdx = i * rowSize;
+        final endIdx = (height - 1 - i) * rowSize;
+        for (var j = 0; j < rowSize; j++) {
+          final temp = lpvBits[startIdx + j];
+          lpvBits[startIdx + j] = lpvBits[endIdx + j];
+          lpvBits[endIdx + j] = temp;
+        }
+      }
+
+      return Uint8List.fromList(lpvBits.asTypedList(bitmapSize));
+    } finally {
+      calloc.free(lpvBits);
+    }
+  }
 }
