@@ -17,6 +17,19 @@ class IconInfo extends Equatable {
   String toString() {
     return 'IconInfo(width: $width, height: $height, colorDepth: $colorDepth, pixelData: $pixelData)';
   }
+  copyWith({
+    int? width,
+    int? height,
+    int? colorDepth,
+    Uint8List? pixelData,
+  }) {
+    return IconInfo(
+      width: width ?? this.width,
+      height: height ?? this.height,
+      colorDepth: colorDepth ?? this.colorDepth,
+      pixelData: pixelData ?? this.pixelData,
+    );
+  }
 
   @override
   List<Object?> get props => [
