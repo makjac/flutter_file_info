@@ -56,5 +56,23 @@ void main() {
       expect(updatedFileInfo.fileSize, '1 KB');
     });
 
+    test('FileInfo toString returns correct string representation', () {
+      final fileInfo = FileMetadata(
+        filePath: 'C:/test/file.txt',
+        fileName: 'file.txt',
+        fileExtension: '.txt',
+        fileType: 'Text Document',
+        creationTime: DateTime(2023, 8, 10),
+        modifiedTime: DateTime(2023, 8, 12),
+        accessedTime: DateTime(2023, 8, 13),
+        sizeBytes: 1024,
+        fileSize: '1 KB',
+      );
+
+      expect(
+        fileInfo.toString(),
+        'FileInfo(filePath: C:/test/file.txt, fileName: file.txt, fileExtension: .txt, fileType: Text Document, creationTime: 2023-08-10 00:00:00.000, modifiedTime: 2023-08-12 00:00:00.000, accessedTime: 2023-08-13 00:00:00.000, sizeBytes: 1024, fileSize: 1 KB)',
+      );
+    });
   });
 }
