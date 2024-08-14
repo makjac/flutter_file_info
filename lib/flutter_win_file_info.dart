@@ -1,1 +1,0 @@
-library flutter_win_file_info;
