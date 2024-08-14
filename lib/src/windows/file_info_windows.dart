@@ -17,6 +17,45 @@ class FileInfoWindows extends FileInfo {
     FileInfo.instance = FileInfoWindows();
   }
 
+  @override
+  Future<IconInfo?> getFileIconInfo(String filePath) async {
+    final Pointer<SHFILEINFO> fileInfo = calloc<SHFILEINFO>();
+
+    try {
+      // Retrieve file icon information
+      final fileInfoPtr = await _getFileIconInfo(filePath);
+      final hIcon = fileInfoPtr.ref.hIcon;
+
+      // Retrieve detailed icon information
+      final piconinfo = await _getIconInfo(hIcon);
+
+      // Retrieve bitmap information
+      final pBitmapInfo = await _getBitmapInfo(piconinfo.ref.hbmColor);
+
+      // Retrieve pixel data
+      final pixelData =
+          await _getPixelData(piconinfo.ref.hbmColor, pBitmapInfo);
+
+      // Convert pixel data to PNG format
+      final pngData = _convertToPng(
+        pBitmapInfo.ref.bmiHeader.biWidth,
+        pBitmapInfo.ref.bmiHeader.biHeight,
+        pixelData,
+      );
+
+      return IconInfo(
+        width: pBitmapInfo.ref.bmiHeader.biWidth,
+        height: pBitmapInfo.ref.bmiHeader.biHeight,
+        colorDepth: pBitmapInfo.ref.bmiHeader.biBitCount,
+        pixelData: pngData,
+      );
+    } catch (e) {
+      return null;
+    } finally {
+      calloc.free(fileInfo);
+    }
+  }
+
   Future<Pointer<SHFILEINFO>> _getFileIconInfo(String filePath) async {
     final Pointer<SHFILEINFO> fileInfo = calloc<SHFILEINFO>();
 
