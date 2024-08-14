@@ -20,4 +20,6 @@ abstract class FileInfoWindowsFfiTypes {
   );
 
   int getDC(int hwnd);
+
+  int destroyIcon(int hIcon);
 }
