@@ -37,4 +37,16 @@ class FileInfoWindows extends FileInfo {
       rethrow;
     }
   }
+
+  Future<Pointer<ICONINFO>> _getIconInfo(int hIcon) async {
+    final Pointer<ICONINFO> piconinfo = calloc<ICONINFO>();
+
+    try {
+      _iconExtractor.getIconInfo(hIcon, piconinfo);
+      return piconinfo;
+    } catch (e) {
+      calloc.free(piconinfo);
+      rethrow;
+    }
+  }
 }
