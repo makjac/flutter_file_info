@@ -14,5 +14,10 @@ abstract class FileInfo extends PlatformInterface {
     PlatformInterface.verifyToken(instance, _token);
     _instance = instance;
   }
+
+  Future<IconInfo?> getFileIconInfo(String filePath) =>
+      throw UnimplementedError('getFileIconInfo() has not been implemented.');
+}
+
 class _DefaultFileInfo extends FileInfo {
 }
