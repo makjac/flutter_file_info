@@ -49,4 +49,26 @@ class FileInfoWindows extends FileInfo {
       rethrow;
     }
   }
+
+  Future<Pointer<BITMAPINFO>> _getBitmapInfo(int hbmColor) async {
+    final Pointer<BITMAPINFO> pBitmapInfo = calloc<BITMAPINFO>();
+
+    try {
+      pBitmapInfo.ref.bmiHeader.biSize = sizeOf<BITMAPINFOHEADER>();
+      final hdcScreen = _iconExtractor.getDC(NULL);
+      _iconExtractor.getDIBits(
+        hdcScreen,
+        hbmColor,
+        0,
+        0,
+        nullptr,
+        pBitmapInfo,
+        DIB_USAGE.DIB_RGB_COLORS,
+      );
+      return pBitmapInfo;
+    } catch (e) {
+      calloc.free(pBitmapInfo);
+      rethrow;
+    }
+  }
 }
