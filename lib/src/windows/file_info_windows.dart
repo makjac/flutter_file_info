@@ -110,4 +110,17 @@ class FileInfoWindows extends FileInfo {
       calloc.free(lpvBits);
     }
   }
+
+  Uint8List _convertToPng(int width, int height, Uint8List pixelData) {
+    // Create an img.Image from the raw pixel data
+    final image = img.Image.fromBytes(
+      width: width,
+      height: height,
+      bytes: pixelData.buffer,
+      order: img.ChannelOrder.bgra,
+    );
+
+    // Encode the image to PNG format
+    return Uint8List.fromList(img.encodePng(image));
+  }
 }
