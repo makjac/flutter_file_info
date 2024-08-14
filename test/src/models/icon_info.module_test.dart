@@ -41,5 +41,21 @@ void main() {
       expect(updatedIconInfo.colorDepth, 24); // should remain the same
       expect(updatedIconInfo.pixelData, newPixelData);
     });
+
+    test('IconInfo toString returns correct string representation', () {
+      final pixelData = Uint8List.fromList([0, 1, 2, 3, 4]);
+
+      final iconInfo = IconInfo(
+        width: 32,
+        height: 32,
+        colorDepth: 24,
+        pixelData: pixelData,
+      );
+
+      expect(
+        iconInfo.toString(),
+        'IconInfo(width: 32, height: 32, colorDepth: 24, pixelData: $pixelData)',
+      );
+    });
   });
 }
