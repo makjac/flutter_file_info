@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_file_info/flutter_file_info.dart';
 
 class FileMetadata extends Equatable {
   /// The full path of the file.
@@ -28,6 +29,12 @@ class FileMetadata extends Equatable {
   /// The size of the file formatted as a human-readable string, e.g., '1.5 GB'.
   final String? fileSize;
 
+  /// The Windows file attributes represented as a numerical bitmask.
+  final int? dwFileAttributes;
+
+  /// The list of [FileAttributes] representing the file's attributes.
+  final List<FileAttributes>? attributes;
+
   /// Creates a new instance of [FileMetadata] with the specified parameters.
   const FileMetadata({
     required this.filePath,
@@ -39,6 +46,8 @@ class FileMetadata extends Equatable {
     this.accessedTime,
     this.sizeBytes,
     this.fileSize,
+    this.dwFileAttributes,
+    this.attributes,
   });
 
   /// Returns a string representation of the [FileMetadata] object.
@@ -52,7 +61,9 @@ class FileMetadata extends Equatable {
       'modifiedTime: $modifiedTime, '
       'accessedTime: $accessedTime, '
       'sizeBytes: $sizeBytes, '
-      'fileSize: $fileSize)';
+      'fileSize: $fileSize, '
+      'dwFileAttributes: $dwFileAttributes, '
+      'attributes: $attributes)';
 
   /// Creates a new [FileMetadata] object with updated values based on the provided parameters.
   ///
@@ -67,6 +78,8 @@ class FileMetadata extends Equatable {
     DateTime? accessedTime,
     int? sizeBytes,
     String? fileSize,
+    int? dwFileAttributes,
+    List<FileAttributes>? attributes,
   }) {
     return FileMetadata(
       filePath: filePath ?? this.filePath,
@@ -78,6 +91,8 @@ class FileMetadata extends Equatable {
       accessedTime: accessedTime ?? this.accessedTime,
       sizeBytes: sizeBytes ?? this.sizeBytes,
       fileSize: fileSize ?? this.fileSize,
+      dwFileAttributes: dwFileAttributes ?? this.dwFileAttributes,
+      attributes: attributes ?? this.attributes,
     );
   }
 
@@ -93,5 +108,7 @@ class FileMetadata extends Equatable {
         accessedTime,
         sizeBytes,
         fileSize,
+        dwFileAttributes,
+        attributes,
       ];
 }
