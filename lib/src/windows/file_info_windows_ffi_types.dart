@@ -36,4 +36,10 @@ class FileInfoWindowsFfiTypesImpl implements FileInfoWindowsFfiTypes {
   int getIconInfo(int hIcon, Pointer<ICONINFO> piconinfo) {
     return GetIconInfo(hIcon, piconinfo);
   }
+
+  @override
+  int getDIBits(int hdc, int hbmp, int uStartScan, int cScanLines,
+      Pointer lpvBits, Pointer<BITMAPINFO> lpbi, int uUsage) {
+    return GetDIBits(hdc, hbmp, uStartScan, cScanLines, lpvBits, lpbi, uUsage);
+  }
 }
