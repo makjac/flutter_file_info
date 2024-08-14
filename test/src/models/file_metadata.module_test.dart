@@ -74,5 +74,46 @@ void main() {
         'FileInfo(filePath: C:/test/file.txt, fileName: file.txt, fileExtension: .txt, fileType: Text Document, creationTime: 2023-08-10 00:00:00.000, modifiedTime: 2023-08-12 00:00:00.000, accessedTime: 2023-08-13 00:00:00.000, sizeBytes: 1024, fileSize: 1 KB)',
       );
     });
+
+    test('FileInfo equality comparison works correctly', () {
+      final fileInfo1 = FileMetadata(
+        filePath: 'C:/test/file.txt',
+        fileName: 'file.txt',
+        fileExtension: '.txt',
+        fileType: 'Text Document',
+        creationTime: DateTime(2023, 8, 10),
+        modifiedTime: DateTime(2023, 8, 12),
+        accessedTime: DateTime(2023, 8, 13),
+        sizeBytes: 1024,
+        fileSize: '1 KB',
+      );
+
+      final fileInfo2 = FileMetadata(
+        filePath: 'C:/test/file.txt',
+        fileName: 'file.txt',
+        fileExtension: '.txt',
+        fileType: 'Text Document',
+        creationTime: DateTime(2023, 8, 10),
+        modifiedTime: DateTime(2023, 8, 12),
+        accessedTime: DateTime(2023, 8, 13),
+        sizeBytes: 1024,
+        fileSize: '1 KB',
+      );
+
+      final fileInfo3 = FileMetadata(
+        filePath: 'D:/test/file.txt',
+        fileName: 'file.txt',
+        fileExtension: '.txt',
+        fileType: 'Text Document',
+        creationTime: DateTime(2023, 8, 10),
+        modifiedTime: DateTime(2023, 8, 12),
+        accessedTime: DateTime(2023, 8, 13),
+        sizeBytes: 1024,
+        fileSize: '1 KB',
+      );
+
+      expect(fileInfo1, equals(fileInfo2));
+      expect(fileInfo1, isNot(equals(fileInfo3)));
+    });
   });
 }
