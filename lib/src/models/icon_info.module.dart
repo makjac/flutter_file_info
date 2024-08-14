@@ -14,6 +14,11 @@ class IconInfo extends Equatable {
     required this.pixelData,
   });
   @override
+  String toString() {
+    return 'IconInfo(width: $width, height: $height, colorDepth: $colorDepth, pixelData: $pixelData)';
+  }
+
+  @override
   List<Object?> get props => [
         width,
         height,
