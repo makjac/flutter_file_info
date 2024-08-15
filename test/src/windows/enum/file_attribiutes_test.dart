@@ -78,5 +78,10 @@ void main() {
       expect(FileAttributes.VIRTUAL.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_VIRTUAL);
     });
+
+    test('FileAttributes.EA has correct value', () {
+      expect(
+          FileAttributes.EA.value, FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_EA);
+    });
   });
 }
