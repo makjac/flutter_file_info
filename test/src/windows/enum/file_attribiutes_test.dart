@@ -58,5 +58,10 @@ void main() {
       expect(FileAttributes.COMPRESSED.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_COMPRESSED);
     });
+
+    test('FileAttributes.OFFLINE has correct value', () {
+      expect(FileAttributes.OFFLINE.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_OFFLINE);
+    });
   });
 }
