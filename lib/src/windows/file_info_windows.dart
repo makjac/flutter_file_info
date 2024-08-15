@@ -196,4 +196,8 @@ class FileInfoWindows extends FileInfo {
       _freeAllocatedMemory(pathPtr, findData);
     }
   }
+
+  Pointer<WIN32_FIND_DATA> _allocateFindData() {
+    return calloc<WIN32_FIND_DATA>();
+  }
 }
