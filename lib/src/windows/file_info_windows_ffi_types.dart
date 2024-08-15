@@ -22,6 +22,8 @@ abstract class FileInfoWindowsFfiTypes {
   int getDC(int hwnd);
 
   int destroyIcon(int hIcon);
+
+  DynamicLibrary openKernel32();
 }
 
 class FileInfoWindowsFfiTypesImpl implements FileInfoWindowsFfiTypes {
