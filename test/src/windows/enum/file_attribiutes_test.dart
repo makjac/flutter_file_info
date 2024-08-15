@@ -38,5 +38,10 @@ void main() {
       expect(FileAttributes.NORMAL.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL);
     });
+
+    test('FileAttributes.TEMPORARY has correct value', () {
+      expect(FileAttributes.TEMPORARY.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_TEMPORARY);
+    });
   });
 }
