@@ -49,4 +49,24 @@ class WindowsUtilsImpl extends WindowsUtils {
 
     return attributes;
   }
+
+  @override
+  String formatFileSize(int sizeInBytes) {
+    const int kb = 1024;
+    const int mb = kb * 1024;
+    const int gb = mb * 1024;
+    const int tb = gb * 1024;
+
+    if (sizeInBytes >= tb) {
+      return '${(sizeInBytes / tb).toStringAsFixed(2)} TB';
+    } else if (sizeInBytes >= gb) {
+      return '${(sizeInBytes / gb).toStringAsFixed(2)} GB';
+    } else if (sizeInBytes >= mb) {
+      return '${(sizeInBytes / mb).toStringAsFixed(2)} MB';
+    } else if (sizeInBytes >= kb) {
+      return '${(sizeInBytes / kb).toStringAsFixed(2)} KB';
+    } else {
+      return '0 KB';
+    }
+  }
   }
