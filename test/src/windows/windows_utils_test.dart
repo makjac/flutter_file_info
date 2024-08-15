@@ -12,5 +12,21 @@ void main() {
 
       expect(fileType, isNotEmpty);
     });
+
+    test(
+        'getFileAttributesFromMask converts attribute mask to list of FileAttributes',
+        () {
+      const attributeMask = 37;
+      final attributes = windowsUtils.getFileAttributesFromMask(attributeMask);
+
+      expect(
+          attributes,
+          containsAll([
+            FileAttributes.READ_ONLY,
+            FileAttributes.SYSTEM,
+            FileAttributes.ARCHIVE,
+          ]));
+      expect(attributes, isNot(contains(FileAttributes.HIDDEN)));
+    });
   });
 }
