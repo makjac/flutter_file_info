@@ -53,5 +53,10 @@ void main() {
       expect(FileAttributes.REPARSE_POINT.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_REPARSE_POINT);
     });
+
+    test('FileAttributes.COMPRESSED has correct value', () {
+      expect(FileAttributes.COMPRESSED.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_COMPRESSED);
+    });
   });
 }
