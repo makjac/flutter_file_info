@@ -28,5 +28,16 @@ void main() {
           ]));
       expect(attributes, isNot(contains(FileAttributes.HIDDEN)));
     });
+
+    test('formatFileSize formats file size correctly', () {
+      expect(windowsUtils.formatFileSize(1023), '0 KB');
+      expect(windowsUtils.formatFileSize(1024), '1.00 KB');
+      expect(windowsUtils.formatFileSize(1048575), '1024.00 KB');
+      expect(windowsUtils.formatFileSize(1048576), '1.00 MB');
+      expect(windowsUtils.formatFileSize(1073741823), '1024.00 MB');
+      expect(windowsUtils.formatFileSize(1073741824), '1.00 GB');
+      expect(windowsUtils.formatFileSize(1099511627775), '1024.00 GB');
+      expect(windowsUtils.formatFileSize(1099511627776), '1.00 TB');
+    });
   });
 }
