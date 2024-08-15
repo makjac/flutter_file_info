@@ -93,5 +93,10 @@ void main() {
       expect(FileAttributes.UNPINNED.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_UNPINNED);
     });
+
+    test('FileAttributes.RECALL_ON_OPEN has correct value', () {
+      expect(FileAttributes.RECALL_ON_OPEN.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_RECALL_ON_OPEN);
+    });
   });
 }
