@@ -27,4 +27,13 @@ class WindowsUtilsImpl extends WindowsUtils {
 
     return fileInfo.ref.szTypeName;
   }
+
+  @override
+  DateTime convertFileTimeToDateTime(FILETIME fileTime) {
+    final int64Value = (fileTime.dwHighDateTime << 32) | fileTime.dwLowDateTime;
+
+    final microsecondsSinceEpoch = int64Value / 10 - 11644473600000000;
+
+    return DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch.round());
+  }
   }
