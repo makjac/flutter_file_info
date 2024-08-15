@@ -1,5 +1,6 @@
-import 'package:flutter_file_info/src/models/file_metadata.module.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_file_info/flutter_file_info.dart';
+import 'package:win32/win32.dart';
 
 void main() {
   group('FileInfo Tests', () {
@@ -14,6 +15,8 @@ void main() {
         accessedTime: DateTime(2023, 8, 13),
         sizeBytes: 1024,
         fileSize: '1 KB',
+        dwFileAttributes: FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_READONLY,
+        attributes: const [FileAttributes.READ_ONLY, FileAttributes.HIDDEN],
       );
 
       expect(fileInfo.filePath, 'C:/test/file.txt');
@@ -25,6 +28,10 @@ void main() {
       expect(fileInfo.accessedTime, DateTime(2023, 8, 13));
       expect(fileInfo.sizeBytes, 1024);
       expect(fileInfo.fileSize, '1 KB');
+      expect(fileInfo.dwFileAttributes,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_READONLY);
+      expect(fileInfo.attributes,
+          [FileAttributes.READ_ONLY, FileAttributes.HIDDEN]);
     });
 
     test('FileInfo copyWith creates a new instance with updated values', () {
@@ -38,11 +45,15 @@ void main() {
         accessedTime: DateTime(2023, 8, 13),
         sizeBytes: 1024,
         fileSize: '1 KB',
+        dwFileAttributes: FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_READONLY,
+        attributes: const [FileAttributes.READ_ONLY],
       );
 
       final updatedFileInfo = fileInfo.copyWith(
         fileName: 'new_file.txt',
         sizeBytes: 2048,
+        dwFileAttributes: FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_HIDDEN,
+        attributes: [FileAttributes.HIDDEN, FileAttributes.SYSTEM],
       );
 
       expect(updatedFileInfo.filePath, 'C:/test/file.txt');
@@ -54,6 +65,10 @@ void main() {
       expect(updatedFileInfo.accessedTime, DateTime(2023, 8, 13));
       expect(updatedFileInfo.sizeBytes, 2048);
       expect(updatedFileInfo.fileSize, '1 KB');
+      expect(updatedFileInfo.dwFileAttributes,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_HIDDEN);
+      expect(updatedFileInfo.attributes,
+          [FileAttributes.HIDDEN, FileAttributes.SYSTEM]);
     });
 
     test('FileInfo toString returns correct string representation', () {
@@ -67,11 +82,17 @@ void main() {
         accessedTime: DateTime(2023, 8, 13),
         sizeBytes: 1024,
         fileSize: '1 KB',
+        dwFileAttributes: FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_READONLY,
+        attributes: const [FileAttributes.READ_ONLY, FileAttributes.HIDDEN],
       );
 
       expect(
         fileInfo.toString(),
-        'FileInfo(filePath: C:/test/file.txt, fileName: file.txt, fileExtension: .txt, fileType: Text Document, creationTime: 2023-08-10 00:00:00.000, modifiedTime: 2023-08-12 00:00:00.000, accessedTime: 2023-08-13 00:00:00.000, sizeBytes: 1024, fileSize: 1 KB)',
+        'FileInfo(filePath: C:/test/file.txt, fileName: file.txt, fileExtension: .txt, '
+        'fileType: Text Document, creationTime: 2023-08-10 00:00:00.000, '
+        'modifiedTime: 2023-08-12 00:00:00.000, accessedTime: 2023-08-13 00:00:00.000, '
+        'sizeBytes: 1024, fileSize: 1 KB, dwFileAttributes: ${FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_READONLY}, '
+        'attributes: [FileAttributes.READ_ONLY, FileAttributes.HIDDEN])',
       );
     });
 
@@ -86,6 +107,8 @@ void main() {
         accessedTime: DateTime(2023, 8, 13),
         sizeBytes: 1024,
         fileSize: '1 KB',
+        dwFileAttributes: FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_READONLY,
+        attributes: const [FileAttributes.READ_ONLY],
       );
 
       final fileInfo2 = FileMetadata(
@@ -98,6 +121,8 @@ void main() {
         accessedTime: DateTime(2023, 8, 13),
         sizeBytes: 1024,
         fileSize: '1 KB',
+        dwFileAttributes: FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_READONLY,
+        attributes: const [FileAttributes.READ_ONLY],
       );
 
       final fileInfo3 = FileMetadata(
@@ -110,6 +135,8 @@ void main() {
         accessedTime: DateTime(2023, 8, 13),
         sizeBytes: 1024,
         fileSize: '1 KB',
+        dwFileAttributes: FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_HIDDEN,
+        attributes: const [FileAttributes.HIDDEN],
       );
 
       expect(fileInfo1, equals(fileInfo2));

@@ -4,18 +4,28 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:flutter_file_info/flutter_file_info.dart';
 import 'package:flutter_file_info/src/windows/file_info_windows_ffi_types.dart';
+import 'package:flutter_file_info/src/windows/windows_utils.dart';
 import 'package:win32/win32.dart';
 import 'package:image/image.dart' as img;
 
 class FileInfoWindows extends FileInfo {
-  FileInfoWindows({FileInfoWindowsFfiTypes? iconExtractor})
-      : _iconExtractor = iconExtractor ?? FileInfoWindowsFfiTypesImpl();
+  FileInfoWindows(
+      {FileInfoWindowsFfiTypes? iconExtractor, WindowsUtils? windowsUtils})
+      : _ffiTypes = iconExtractor ?? FileInfoWindowsFfiTypesImpl(),
+        _windowsUtils = windowsUtils ?? WindowsUtilsImpl();
 
-  final FileInfoWindowsFfiTypes _iconExtractor;
+  final FileInfoWindowsFfiTypes _ffiTypes;
+  final WindowsUtils _windowsUtils;
 
   static void registerWith() {
     FileInfo.instance = FileInfoWindows();
   }
+
+  // ========================================
+  //
+  //  Icon Info Methods
+  //
+  // ========================================
 
   @override
   Future<IconInfo?> getFileIconInfo(String filePath) async {
@@ -60,7 +70,7 @@ class FileInfoWindows extends FileInfo {
     final Pointer<SHFILEINFO> fileInfo = calloc<SHFILEINFO>();
 
     try {
-      _iconExtractor.shGetFileInfo(
+      _ffiTypes.shGetFileInfo(
         filePath.toNativeUtf16(),
         FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_DIRECTORY,
         fileInfo,
@@ -81,7 +91,7 @@ class FileInfoWindows extends FileInfo {
     final Pointer<ICONINFO> piconinfo = calloc<ICONINFO>();
 
     try {
-      _iconExtractor.getIconInfo(hIcon, piconinfo);
+      _ffiTypes.getIconInfo(hIcon, piconinfo);
       return piconinfo;
     } catch (e) {
       calloc.free(piconinfo);
@@ -94,8 +104,8 @@ class FileInfoWindows extends FileInfo {
 
     try {
       pBitmapInfo.ref.bmiHeader.biSize = sizeOf<BITMAPINFOHEADER>();
-      final hdcScreen = _iconExtractor.getDC(NULL);
-      _iconExtractor.getDIBits(
+      final hdcScreen = _ffiTypes.getDC(NULL);
+      _ffiTypes.getDIBits(
         hdcScreen,
         hbmColor,
         0,
@@ -120,8 +130,8 @@ class FileInfoWindows extends FileInfo {
     final lpvBits = calloc<Uint8>(bitmapSize);
 
     try {
-      final hdcScreen = _iconExtractor.getDC(NULL);
-      _iconExtractor.getDIBits(
+      final hdcScreen = _ffiTypes.getDC(NULL);
+      _ffiTypes.getDIBits(
         hdcScreen,
         hbmColor,
         0,
@@ -161,5 +171,67 @@ class FileInfoWindows extends FileInfo {
 
     // Encode the image to PNG format
     return Uint8List.fromList(img.encodePng(image));
+  }
+
+  // ========================================
+  //
+  //  File Info Methods
+  //
+  // ========================================
+
+  @override
+  Future<FileMetadata?> getFileInfo(String filePath) async {
+    final pathPtr = filePath.toNativeUtf16();
+    final findData = _allocateFindData();
+
+    try {
+      final hFind = _ffiTypes.findFirstFile(pathPtr, findData);
+
+      if (hFind != 0) {
+        return _createFileInfo(filePath, findData);
+      } else {
+        return null;
+      }
+    } finally {
+      _freeAllocatedMemory(pathPtr, findData);
+    }
+  }
+
+  Pointer<WIN32_FIND_DATA> _allocateFindData() {
+    return calloc<WIN32_FIND_DATA>();
+  }
+
+  void _freeAllocatedMemory(
+      Pointer<Utf16> pathPtr, Pointer<WIN32_FIND_DATA> findData) {
+    calloc.free(pathPtr);
+    calloc.free(findData);
+  }
+
+  FileMetadata _createFileInfo(
+      String filePath, Pointer<WIN32_FIND_DATA> findData) {
+    final fileType = _windowsUtils.getFileType(filePath);
+    final creationTime =
+        _windowsUtils.convertFileTimeToDateTime(findData.ref.ftCreationTime);
+    final modifiedTime =
+        _windowsUtils.convertFileTimeToDateTime(findData.ref.ftLastWriteTime);
+    final accessedTime =
+        _windowsUtils.convertFileTimeToDateTime(findData.ref.ftLastAccessTime);
+    final fileSize = _windowsUtils.formatFileSize(findData.ref.nFileSizeLow);
+    final attributes =
+        _windowsUtils.getFileAttributesFromMask(findData.ref.dwFileAttributes);
+
+    return FileMetadata(
+      filePath: filePath,
+      fileName: findData.ref.cFileName,
+      fileExtension: filePath.contains('.') ? filePath.split('.').last : '',
+      fileType: fileType,
+      creationTime: creationTime,
+      modifiedTime: modifiedTime,
+      accessedTime: accessedTime,
+      sizeBytes: findData.ref.nFileSizeLow,
+      fileSize: fileSize,
+      dwFileAttributes: findData.ref.dwFileAttributes,
+      attributes: attributes,
+    );
   }
 }

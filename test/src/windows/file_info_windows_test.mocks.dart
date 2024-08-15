@@ -6,9 +6,13 @@
 import 'dart:ffi' as _i3;
 
 import 'package:ffi/ffi.dart' as _i4;
+import 'package:flutter_file_info/src/windows/enum/file_attribiutes.dart'
+    as _i8;
 import 'package:flutter_file_info/src/windows/file_info_windows_ffi_types.dart'
     as _i2;
+import 'package:flutter_file_info/src/windows/windows_utils.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i6;
 import 'package:win32/win32.dart' as _i5;
 
 // ignore_for_file: type=lint
@@ -23,6 +27,16 @@ import 'package:win32/win32.dart' as _i5;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+
+class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
+  _FakeDateTime_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
 
 /// A class which mocks [FileInfoWindowsFfiTypes].
 ///
@@ -114,4 +128,100 @@ class MockFileInfoWindowsFfiTypes extends _i1.Mock
         ),
         returnValue: 0,
       ) as int);
+
+  @override
+  _i3.DynamicLibrary openKernel32() => (super.noSuchMethod(
+        Invocation.method(
+          #openKernel32,
+          [],
+        ),
+        returnValue: _i6.dummyValue<_i3.DynamicLibrary>(
+          this,
+          Invocation.method(
+            #openKernel32,
+            [],
+          ),
+        ),
+      ) as _i3.DynamicLibrary);
+
+  @override
+  int findFirstFile(
+    _i3.Pointer<_i4.Utf16>? pathPtr,
+    _i3.Pointer<_i5.WIN32_FIND_DATA>? findData,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #findFirstFile,
+          [
+            pathPtr,
+            findData,
+          ],
+        ),
+        returnValue: 0,
+      ) as int);
+}
+
+/// A class which mocks [WindowsUtils].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockWindowsUtils extends _i1.Mock implements _i7.WindowsUtils {
+  MockWindowsUtils() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String getFileType(String? filePath) => (super.noSuchMethod(
+        Invocation.method(
+          #getFileType,
+          [filePath],
+        ),
+        returnValue: _i6.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getFileType,
+            [filePath],
+          ),
+        ),
+      ) as String);
+
+  @override
+  DateTime convertFileTimeToDateTime(_i5.FILETIME? fileTime) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #convertFileTimeToDateTime,
+          [fileTime],
+        ),
+        returnValue: _FakeDateTime_0(
+          this,
+          Invocation.method(
+            #convertFileTimeToDateTime,
+            [fileTime],
+          ),
+        ),
+      ) as DateTime);
+
+  @override
+  List<_i8.FileAttributes> getFileAttributesFromMask(int? attributeMask) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getFileAttributesFromMask,
+          [attributeMask],
+        ),
+        returnValue: <_i8.FileAttributes>[],
+      ) as List<_i8.FileAttributes>);
+
+  @override
+  String formatFileSize(int? sizeInBytes) => (super.noSuchMethod(
+        Invocation.method(
+          #formatFileSize,
+          [sizeInBytes],
+        ),
+        returnValue: _i6.dummyValue<String>(
+          this,
+          Invocation.method(
+            #formatFileSize,
+            [sizeInBytes],
+          ),
+        ),
+      ) as String);
 }

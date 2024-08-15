@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -22,6 +23,10 @@ abstract class FileInfoWindowsFfiTypes {
   int getDC(int hwnd);
 
   int destroyIcon(int hIcon);
+
+  DynamicLibrary openKernel32();
+
+  int findFirstFile(Pointer<Utf16> pathPtr, Pointer<WIN32_FIND_DATA> findData);
 }
 
 class FileInfoWindowsFfiTypesImpl implements FileInfoWindowsFfiTypes {
@@ -51,5 +56,24 @@ class FileInfoWindowsFfiTypesImpl implements FileInfoWindowsFfiTypes {
   @override
   int destroyIcon(int hIcon) {
     return DestroyIcon(hIcon);
+  }
+
+  @override
+  DynamicLibrary openKernel32() {
+    if (Platform.isWindows) {
+      return DynamicLibrary.open('kernel32.dll');
+    } else {
+      throw Exception('This code is intended to run on Windows.');
+    }
+  }
+
+  @override
+  int findFirstFile(Pointer<Utf16> pathPtr, Pointer<WIN32_FIND_DATA> findData) {
+    return openKernel32().lookupFunction<
+            UintPtr Function(Pointer<Utf16> lpFileName,
+                Pointer<WIN32_FIND_DATA> lpFindFileData),
+            int Function(Pointer<Utf16> lpFileName,
+                Pointer<WIN32_FIND_DATA> lpFindFileData)>('FindFirstFileW')(
+        pathPtr, findData);
   }
 }
