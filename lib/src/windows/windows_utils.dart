@@ -25,6 +25,27 @@ abstract class WindowsUtils {
   /// - [SHFILEINFO structure documentation](https://docs.microsoft.com/en-us/windows/win32/api/shellapi/ns-shellapi-shfileinfow)
   /// - [SHGetFileInfo function documentation](https://docs.microsoft.com/en-us/windows/win32/api/shellapi/nf-shellapi-shgetfileinfow)
   String getFileType(String filePath);
+
+  /// Converts a Windows FILETIME structure to a Dart [DateTime] object.
+  ///
+  /// The Windows FILETIME structure represents the date and time in the file system. This function takes a FILETIME structure
+  /// as input and converts it into a Dart [DateTime] object, allowing easier manipulation and display of the date and time.
+  ///
+  /// The FILETIME structure is a 64-bit value where the low 32 bits represent the number of 100-nanosecond intervals since January 1, 1601,
+  /// and the high 32 bits provide additional precision. This function converts this structure to microseconds since epoch, then
+  /// constructs a [DateTime] object using [DateTime.fromMicrosecondsSinceEpoch].
+  ///
+  /// Example usage:
+  /// ```dart
+  /// FILETIME fileTime = ...; // Some FILETIME structure
+  /// DateTime dateTime = convertFileTimeToDateTime(fileTime);
+  /// print('Converted DateTime: $dateTime');
+  /// ```
+  ///
+  /// Note: The FILETIME structure is often used in Windows API functions to represent time-related information.
+  ///
+  /// See also:
+  /// - [FILETIME documentation](https://docs.microsoft.com/en-us/windows/win32/api/minwinbase/ns-minwinbase-filetime)
   DateTime convertFileTimeToDateTime(FILETIME fileTime);
   List<FileAttributes> getFileAttributesFromMask(int attributeMask);
   String formatFileSize(int sizeInBytes);
