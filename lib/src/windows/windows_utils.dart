@@ -47,6 +47,22 @@ abstract class WindowsUtils {
   /// See also:
   /// - [FILETIME documentation](https://docs.microsoft.com/en-us/windows/win32/api/minwinbase/ns-minwinbase-filetime)
   DateTime convertFileTimeToDateTime(FILETIME fileTime);
+
+  /// Converts a numerical attribute mask into a list of [FileAttributes].
+  ///
+  /// This function takes a numerical attribute mask as input and converts it into a list of [FileAttributes],
+  /// representing the individual attributes that are set in the mask. Each attribute in the [FileAttributes] enum
+  /// corresponds to a specific bit in the attribute mask.
+  ///
+  /// Example usage:
+  /// ```dart
+  /// int attributeMask = 37; // Binary: 100101
+  /// List<FileAttributes> attributes = getFileAttributesFromMask(attributeMask);
+  /// print('File Attributes: $attributes'); // Output: [READ_ONLY, ARCHIVE, DEVICE]
+  /// ```
+  ///
+  /// Note: This function is useful for extracting individual attributes from a numerical bitmask, providing a more
+  /// convenient representation for understanding the file's characteristics.
   List<FileAttributes> getFileAttributesFromMask(int attributeMask);
   String formatFileSize(int sizeInBytes);
 }
