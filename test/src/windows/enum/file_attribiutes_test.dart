@@ -28,5 +28,10 @@ void main() {
       expect(FileAttributes.ARCHIVE.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_ARCHIVE);
     });
+
+    test('FileAttributes.DEVICE has correct value', () {
+      expect(FileAttributes.DEVICE.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_DEVICE);
+    });
   });
 }
