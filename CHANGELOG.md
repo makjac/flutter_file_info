@@ -1,3 +1,6 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Initial Release: Created the flutter_file_info plugin.
+* Platform Support: Initial release supports only Windows.
+* getFileInfo: Retrieves detailed metadata about a file specified by [filePath].
+* getFileIconInfo: Retrieves icon information for a file or directory specified by [filePath].
