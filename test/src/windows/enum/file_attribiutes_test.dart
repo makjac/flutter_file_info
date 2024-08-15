@@ -48,5 +48,10 @@ void main() {
       expect(FileAttributes.SPARSE_FILE.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_SPARSE_FILE);
     });
+
+    test('FileAttributes.REPARSE_POINT has correct value', () {
+      expect(FileAttributes.REPARSE_POINT.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_REPARSE_POINT);
+    });
   });
 }
