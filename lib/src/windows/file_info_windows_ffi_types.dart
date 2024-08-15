@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -64,5 +65,15 @@ class FileInfoWindowsFfiTypesImpl implements FileInfoWindowsFfiTypes {
     } else {
       throw Exception('This code is intended to run on Windows.');
     }
+  }
+
+  @override
+  int findFirstFile(Pointer<Utf16> pathPtr, Pointer<WIN32_FIND_DATA> findData) {
+    return openKernel32().lookupFunction<
+            UintPtr Function(Pointer<Utf16> lpFileName,
+                Pointer<WIN32_FIND_DATA> lpFindFileData),
+            int Function(Pointer<Utf16> lpFileName,
+                Pointer<WIN32_FIND_DATA> lpFindFileData)>('FindFirstFileW')(
+        pathPtr, findData);
   }
 }
