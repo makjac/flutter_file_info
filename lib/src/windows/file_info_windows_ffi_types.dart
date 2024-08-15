@@ -54,4 +54,13 @@ class FileInfoWindowsFfiTypesImpl implements FileInfoWindowsFfiTypes {
   int destroyIcon(int hIcon) {
     return DestroyIcon(hIcon);
   }
+
+  @override
+  DynamicLibrary openKernel32() {
+    if (Platform.isWindows) {
+      return DynamicLibrary.open('kernel32.dll');
+    } else {
+      throw Exception('This code is intended to run on Windows.');
+    }
+  }
 }
