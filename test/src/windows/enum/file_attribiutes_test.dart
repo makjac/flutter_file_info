@@ -33,5 +33,10 @@ void main() {
       expect(FileAttributes.DEVICE.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_DEVICE);
     });
+
+    test('FileAttributes.NORMAL has correct value', () {
+      expect(FileAttributes.NORMAL.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL);
+    });
   });
 }
