@@ -39,6 +39,30 @@ abstract class FileInfo extends PlatformInterface {
   /// ```
   Future<IconInfo?> getFileIconInfo(String filePath) =>
       throw UnimplementedError('getFileIconInfo() has not been implemented.');
+
+  /// Retrieves detailed metadata about a file specified by [filePath].
+  ///
+  /// This method returns a [FileMetadata] object containing information such as
+  /// the file's name, size, type, and timestamps (creation, modification, and
+  /// access times). The file size is provided in both bytes and a human-readable
+  /// format.
+  ///
+  /// The [filePath] parameter should be a valid path to the file whose metadata
+  /// is to be retrieved.
+  ///
+  /// Returns a [FileMetadata] object with details about the file. If the file's
+  /// metadata cannot be retrieved, the method returns `null`.
+  ///
+  /// Throws an [UnimplementedError] if this method is not yet implemented.
+  ///
+  /// Example:
+  /// ```dart
+  /// final fileMetadata = await fileInfoWindows.getFileInfo('C:\\path\\to\\file.txt');
+  /// if (fileMetadata != null) {
+  ///   print('File name: ${fileMetadata.fileName}');
+  ///   print('File size: ${fileMetadata.fileSize}');
+  /// }
+  /// ```
   Future<FileMetadata?> getFileInfo(String filePath) =>
       throw UnimplementedError('getFileInfo() has not been implemented.');
 }
