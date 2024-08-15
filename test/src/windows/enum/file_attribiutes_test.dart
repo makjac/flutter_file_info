@@ -8,5 +8,10 @@ void main() {
       expect(FileAttributes.READ_ONLY.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_READONLY);
     });
+
+    test('FileAttributes.HIDDEN has correct value', () {
+      expect(FileAttributes.HIDDEN.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_HIDDEN);
+    });
   });
 }
