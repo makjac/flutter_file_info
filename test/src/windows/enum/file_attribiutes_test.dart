@@ -18,5 +18,10 @@ void main() {
       expect(FileAttributes.SYSTEM.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_SYSTEM);
     });
+
+    test('FileAttributes.DIRECTORY has correct value', () {
+      expect(FileAttributes.DIRECTORY.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_DIRECTORY);
+    });
   });
 }
