@@ -13,5 +13,10 @@ void main() {
       expect(FileAttributes.HIDDEN.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_HIDDEN);
     });
+
+    test('FileAttributes.SYSTEM has correct value', () {
+      expect(FileAttributes.SYSTEM.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_SYSTEM);
+    });
   });
 }
