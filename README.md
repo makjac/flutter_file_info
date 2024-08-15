@@ -24,7 +24,7 @@ A Flutter plugin for retrieving detailed file metadata, including native icons. 
 
 Quick simple usage example:
 
-#### Multiple files
+#### Get icon info
 
 ```dart
 IconInfo? _iconInfo = await FileInfo.instance.getFileIconInfo('path/to/example/file.txt');
@@ -39,7 +39,7 @@ Widget _buildFileIcon() {
   }
 ```
 
-#### Single file
+#### Fet file info
 
 ```dart
 FileMetadata? _fileMetatdata = await FileInfo.instance.getFileInfo('path/to/example/file.txt');
