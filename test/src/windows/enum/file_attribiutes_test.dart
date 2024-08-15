@@ -43,5 +43,10 @@ void main() {
       expect(FileAttributes.TEMPORARY.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_TEMPORARY);
     });
+
+    test('FileAttributes.SPARSE_FILE has correct value', () {
+      expect(FileAttributes.SPARSE_FILE.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_SPARSE_FILE);
+    });
   });
 }
