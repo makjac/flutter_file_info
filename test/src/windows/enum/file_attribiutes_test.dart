@@ -68,5 +68,10 @@ void main() {
       expect(FileAttributes.NOT_CONTENT_INDEXED.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NOT_CONTENT_INDEXED);
     });
+
+    test('FileAttributes.ENCRYPTED has correct value', () {
+      expect(FileAttributes.ENCRYPTED.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_ENCRYPTED);
+    });
   });
 }
