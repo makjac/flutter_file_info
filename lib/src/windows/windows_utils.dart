@@ -36,4 +36,17 @@ class WindowsUtilsImpl extends WindowsUtils {
 
     return DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch.round());
   }
+
+  @override
+  List<FileAttributes> getFileAttributesFromMask(int attributeMask) {
+    List<FileAttributes> attributes = [];
+
+    for (var attr in FileAttributes.values) {
+      if (attributeMask & attr.value != 0) {
+        attributes.add(attr);
+      }
+    }
+
+    return attributes;
+  }
   }
