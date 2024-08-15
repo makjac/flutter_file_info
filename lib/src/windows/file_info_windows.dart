@@ -172,4 +172,28 @@ class FileInfoWindows extends FileInfo {
     // Encode the image to PNG format
     return Uint8List.fromList(img.encodePng(image));
   }
+
+  // ========================================
+  //
+  //  File Info Methods
+  //
+  // ========================================
+
+  @override
+  Future<FileMetadata?> getFileInfo(String filePath) async {
+    final pathPtr = filePath.toNativeUtf16();
+    final findData = _allocateFindData();
+
+    try {
+      final hFind = _ffiTypes.findFirstFile(pathPtr, findData);
+
+      if (hFind != 0) {
+        return _createFileInfo(filePath, findData);
+      } else {
+        return null;
+      }
+    } finally {
+      _freeAllocatedMemory(pathPtr, findData);
+    }
+  }
 }
