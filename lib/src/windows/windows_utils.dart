@@ -10,3 +10,21 @@ abstract class WindowsUtils {
   List<FileAttributes> getFileAttributesFromMask(int attributeMask);
   String formatFileSize(int sizeInBytes);
 }
+
+class WindowsUtilsImpl extends WindowsUtils {
+  @override
+  String getFileType(String filePath) {
+    final Pointer<SHFILEINFO> fileInfo = calloc<SHFILEINFO>();
+
+    try {
+      final pathPtr = filePath.toNativeUtf16();
+
+      SHGetFileInfo(pathPtr, 0, fileInfo, sizeOf<SHFILEINFO>(),
+          SHGFI_FLAGS.SHGFI_TYPENAME | SHGFI_FLAGS.SHGFI_USEFILEATTRIBUTES);
+    } finally {
+      calloc.free(fileInfo);
+    }
+
+    return fileInfo.ref.szTypeName;
+  }
+  }
