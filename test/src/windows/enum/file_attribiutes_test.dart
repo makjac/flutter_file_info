@@ -73,5 +73,10 @@ void main() {
       expect(FileAttributes.ENCRYPTED.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_ENCRYPTED);
     });
+
+    test('FileAttributes.VIRTUAL has correct value', () {
+      expect(FileAttributes.VIRTUAL.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_VIRTUAL);
+    });
   });
 }
