@@ -98,5 +98,10 @@ void main() {
       expect(FileAttributes.RECALL_ON_OPEN.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_RECALL_ON_OPEN);
     });
+
+    test('FileAttributes.RECALL_ON_DATA_ACCESS has correct value', () {
+      expect(FileAttributes.RECALL_ON_DATA_ACCESS.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS);
+    });
   });
 }
