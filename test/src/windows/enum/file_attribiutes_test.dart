@@ -63,5 +63,10 @@ void main() {
       expect(FileAttributes.OFFLINE.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_OFFLINE);
     });
+
+    test('FileAttributes.NOT_CONTENT_INDEXED has correct value', () {
+      expect(FileAttributes.NOT_CONTENT_INDEXED.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NOT_CONTENT_INDEXED);
+    });
   });
 }
