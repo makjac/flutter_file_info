@@ -64,6 +64,24 @@ abstract class WindowsUtils {
   /// Note: This function is useful for extracting individual attributes from a numerical bitmask, providing a more
   /// convenient representation for understanding the file's characteristics.
   List<FileAttributes> getFileAttributesFromMask(int attributeMask);
+
+  /// Formats a file size in bytes into a human-readable string representation.
+  ///
+  /// This function takes a size in bytes as input and converts it into a string with an appropriate unit (KB, MB, GB or TB),
+  /// making it more readable for users. The function employs the following conventions:
+  ///
+  /// - If the size is greater than or equal to 1 TB, the result will be formatted as 'X.XX TB'.
+  /// - If the size is between 1 GB and 1 TB (exclusive), the result will be formatted as 'X.XX GB'.
+  /// - If the size is between 1 MB and 1 GB (exclusive), the result will be formatted as 'X.XX MB'.
+  /// - If the size is between 1 KB and 1 MB (exclusive), the result will be formatted as 'X.XX KB'.
+  /// - If the size is less than 1 KB, the result will be '0 KB'.
+  ///
+  /// Example usage:
+  /// ```dart
+  /// int fileSize = 2048000; // Size in bytes (2 MB)
+  /// String formattedSize = formatFileSize(fileSize);
+  /// print('Formatted File Size: $formattedSize'); // Output: '2.00 MB'
+  /// ```
   String formatFileSize(int sizeInBytes);
 }
 
@@ -125,4 +143,4 @@ class WindowsUtilsImpl extends WindowsUtils {
       return '0 KB';
     }
   }
-  }
+}
