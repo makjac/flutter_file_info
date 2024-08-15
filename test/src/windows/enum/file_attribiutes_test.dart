@@ -23,5 +23,10 @@ void main() {
       expect(FileAttributes.DIRECTORY.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_DIRECTORY);
     });
+
+    test('FileAttributes.ARCHIVE has correct value', () {
+      expect(FileAttributes.ARCHIVE.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_ARCHIVE);
+    });
   });
 }
