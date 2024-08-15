@@ -206,4 +206,32 @@ class FileInfoWindows extends FileInfo {
     calloc.free(pathPtr);
     calloc.free(findData);
   }
+
+  FileMetadata _createFileInfo(
+      String filePath, Pointer<WIN32_FIND_DATA> findData) {
+    final fileType = _windowsUtils.getFileType(filePath);
+    final creationTime =
+        _windowsUtils.convertFileTimeToDateTime(findData.ref.ftCreationTime);
+    final modifiedTime =
+        _windowsUtils.convertFileTimeToDateTime(findData.ref.ftLastWriteTime);
+    final accessedTime =
+        _windowsUtils.convertFileTimeToDateTime(findData.ref.ftLastAccessTime);
+    final fileSize = _windowsUtils.formatFileSize(findData.ref.nFileSizeLow);
+    final attributes =
+        _windowsUtils.getFileAttributesFromMask(findData.ref.dwFileAttributes);
+
+    return FileMetadata(
+      filePath: filePath,
+      fileName: findData.ref.cFileName,
+      fileExtension: filePath.contains('.') ? filePath.split('.').last : '',
+      fileType: fileType,
+      creationTime: creationTime,
+      modifiedTime: modifiedTime,
+      accessedTime: accessedTime,
+      sizeBytes: findData.ref.nFileSizeLow,
+      fileSize: fileSize,
+      dwFileAttributes: findData.ref.dwFileAttributes,
+      attributes: attributes,
+    );
+  }
 }
