@@ -1,4 +1,5 @@
-import 'dart:typed_data';
+import 'package:example/file_icon.dart';
+import 'package:example/file_metadata_table.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_file_info/flutter_file_info.dart';
@@ -13,12 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'flutter_file_info Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Demo flutter_file_info'),
     );
   }
 }
@@ -33,42 +35,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Uint8List? _imageBytes;
+  IconInfo? _iconInfo;
+  FileMetadata? _fileMetadata;
+
+  Future<void> _loadFileData({bool isDirectory = false}) async {
+    final path = isDirectory
+        ? await FilePicker.platform.getDirectoryPath()
+        : await _pickFile();
+    if (path == null) return;
+
+    final iconInfo = await FileInfo.instance.getFileIconInfo(path);
+    final metadata = await FileInfo.instance.getFileInfo(path);
+
+    setState(() {
+      _iconInfo = iconInfo;
+      _fileMetadata = metadata;
+    });
+  }
 
   Future<String?> _pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-    if (result != null) {
-      return result.files.single.path!;
-    } else {
-      return null;
-    }
-  }
-
-  Future<String?> _pickDirectory() async {
-    return await FilePicker.platform.getDirectoryPath();
-  }
-
-  void _setupIcon(String path) async {
-    final iconInfo = await FileInfo.instance.getFileIconInfo(path);
-
-    if (iconInfo != null) {
-      setState(() {
-        _imageBytes = iconInfo.pixelData;
-      });
-    }
-  }
-
-  void _loadFile() async {
-    final filePath = await _pickFile();
-    if (filePath == null) return;
-    _setupIcon(filePath);
-  }
-
-  void _loadDirectory() async {
-    final fileDirectory = await _pickDirectory();
-    if (fileDirectory == null) return;
-    _setupIcon(fileDirectory);
+    final result = await FilePicker.platform.pickFiles();
+    return result?.files.single.path;
   }
 
   @override
@@ -82,10 +69,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            _imageBytes != null
-                ? Image.memory(_imageBytes!)
-                : const SizedBox.shrink(),
             _buildButtons(),
+            FileIcon(iconInfo: _iconInfo),
+            FileMetadataTable(fileMetadata: _fileMetadata),
           ],
         ),
       ),
@@ -99,13 +85,13 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
-            onPressed: _loadFile,
+            onPressed: () => _loadFileData(isDirectory: false),
             child: const Text("Load File"),
           ),
           const SizedBox(width: 16),
           ElevatedButton(
-            onPressed: _loadDirectory,
-            child: const Text("Load Direcotry"),
+            onPressed: () => _loadFileData(isDirectory: true),
+            child: const Text("Load Directory"),
           ),
         ],
       ),
