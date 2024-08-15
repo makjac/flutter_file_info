@@ -21,6 +21,12 @@ class FileInfoWindows extends FileInfo {
     FileInfo.instance = FileInfoWindows();
   }
 
+  // ========================================
+  //
+  //  Icon Info Methods
+  //
+  // ========================================
+
   @override
   Future<IconInfo?> getFileIconInfo(String filePath) async {
     final Pointer<SHFILEINFO> fileInfo = calloc<SHFILEINFO>();
@@ -64,7 +70,7 @@ class FileInfoWindows extends FileInfo {
     final Pointer<SHFILEINFO> fileInfo = calloc<SHFILEINFO>();
 
     try {
-      _iconExtractor.shGetFileInfo(
+      _ffiTypes.shGetFileInfo(
         filePath.toNativeUtf16(),
         FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_DIRECTORY,
         fileInfo,
@@ -85,7 +91,7 @@ class FileInfoWindows extends FileInfo {
     final Pointer<ICONINFO> piconinfo = calloc<ICONINFO>();
 
     try {
-      _iconExtractor.getIconInfo(hIcon, piconinfo);
+      _ffiTypes.getIconInfo(hIcon, piconinfo);
       return piconinfo;
     } catch (e) {
       calloc.free(piconinfo);
@@ -98,8 +104,8 @@ class FileInfoWindows extends FileInfo {
 
     try {
       pBitmapInfo.ref.bmiHeader.biSize = sizeOf<BITMAPINFOHEADER>();
-      final hdcScreen = _iconExtractor.getDC(NULL);
-      _iconExtractor.getDIBits(
+      final hdcScreen = _ffiTypes.getDC(NULL);
+      _ffiTypes.getDIBits(
         hdcScreen,
         hbmColor,
         0,
@@ -124,8 +130,8 @@ class FileInfoWindows extends FileInfo {
     final lpvBits = calloc<Uint8>(bitmapSize);
 
     try {
-      final hdcScreen = _iconExtractor.getDC(NULL);
-      _iconExtractor.getDIBits(
+      final hdcScreen = _ffiTypes.getDC(NULL);
+      _ffiTypes.getDIBits(
         hdcScreen,
         hbmColor,
         0,
