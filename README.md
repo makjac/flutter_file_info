@@ -1,5 +1,7 @@
 ![header](https://i.imgur.com/5uioqZd.png)
 
+[![Flutter Windows Tests](https://github.com/makjac/flutter_file_info/actions/workflows/windows.yml/badge.svg)](https://github.com/makjac/flutter_file_info/actions/workflows/windows.yml)
+
 # flutter_file_info
 
 A Flutter plugin for retrieving detailed file metadata, including native icons. Ideal for applications needing file information and icons.
