@@ -88,5 +88,10 @@ void main() {
       expect(FileAttributes.PINNED.value,
           FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_PINNED);
     });
+
+    test('FileAttributes.UNPINNED has correct value', () {
+      expect(FileAttributes.UNPINNED.value,
+          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_UNPINNED);
+    });
   });
 }
