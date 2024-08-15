@@ -24,6 +24,8 @@ abstract class FileInfoWindowsFfiTypes {
   int destroyIcon(int hIcon);
 
   DynamicLibrary openKernel32();
+
+  int findFirstFile(Pointer<Utf16> pathPtr, Pointer<WIN32_FIND_DATA> findData);
 }
 
 class FileInfoWindowsFfiTypesImpl implements FileInfoWindowsFfiTypes {
