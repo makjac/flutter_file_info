@@ -15,4 +15,8 @@ import java.io.File
 import java.io.IOException
 
 class FileIconProvider(private val context: Context, private val packageManager: PackageManager) {
+    private fun isFolder(filePath: String): Boolean {
+        val file = File(filePath)
+        return file.isDirectory
+    }
 }
