@@ -121,6 +121,13 @@ class FileIconProvider(private val context: Context, private val packageManager:
         }
         return null
     }
+
+    /**
+     * Generates a drawable image preview for the given image path.
+     *
+     * @param imagePath The path of the image.
+     * @return The generated drawable image preview, or null if the image path is invalid.
+     */
     private fun generateImagePreviewAsDrawable(imagePath: String): Drawable? {
         val previewBitmap = generateImagePreview(imagePath)
         return previewBitmap?.let { BitmapDrawable(context.resources, it) }
