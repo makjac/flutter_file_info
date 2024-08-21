@@ -41,4 +41,8 @@ class FileIconProvider(private val context: Context, private val packageManager:
         val extension = filePath.substringAfterLast('.', "").lowercase()
         return FileIconData.fileIconMap[extension]
     }
+    private fun String.isImageFile(): Boolean {
+        val imageExtensions = listOf("jpg", "jpeg", "png", "gif", "bmp", "webp")
+        return imageExtensions.any { this.endsWith(it, ignoreCase = true) }
+    }
 }
