@@ -79,6 +79,13 @@ class FileIconProvider(private val context: Context, private val packageManager:
             }
         }
     }
+
+    /**
+     * Retrieves the icon for an APK file.
+     *
+     * @param apkFilePath The path of the APK file.
+     * @return The icon of the APK file as a Drawable object, or null if the icon cannot be retrieved.
+     */
     fun getApkIcon(apkFilePath: String): Drawable? {
         val packageInfo = packageManager.getPackageArchiveInfo(apkFilePath, PackageManager.GET_META_DATA)
         packageInfo?.applicationInfo?.apply {
