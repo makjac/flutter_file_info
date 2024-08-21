@@ -17,6 +17,9 @@ import 'package:flutter_file_info/flutter_file_info.dart';
 /// }
 /// ```
 abstract class AndroidMethodChannel {
+  /// Retrieves the icon information for a file located at the specified [filePath].
+  ///
+  /// Returns a [Future] that completes with an [IconInfo] object containing the icon information.
   Future<IconInfo> getFileIcon(String filePath);
 }
 
