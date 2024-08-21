@@ -228,6 +228,13 @@ class FileIconProvider(private val context: Context, private val packageManager:
         val height = bitmap.height.toDouble()
         return Triple(pixelData, width, height)
     }
+
+    /**
+     * Converts a Drawable to a Bitmap.
+     *
+     * @param drawable The Drawable to convert.
+     * @return The converted Bitmap.
+     */
     private fun convertDrawableToBitmap(drawable: Drawable): Bitmap {
         return if (drawable is BitmapDrawable) {
             drawable.bitmap
