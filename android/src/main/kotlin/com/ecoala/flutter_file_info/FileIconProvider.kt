@@ -15,6 +15,13 @@ import java.io.File
 import java.io.IOException
 
 class FileIconProvider(private val context: Context, private val packageManager: PackageManager) {
+
+    /**
+     * Retrieves the icon for a file based on its file path.
+     *
+     * @param filePath The path of the file.
+     * @return The drawable representing the file icon, or null if the icon is not found.
+     */
     fun getFileIcon(filePath: String): Drawable? {
         if (isFolder(filePath)) {
             return getFolderIcon()
