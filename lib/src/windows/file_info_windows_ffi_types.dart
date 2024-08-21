@@ -25,6 +25,9 @@ abstract class FileInfoWindowsFfiTypes {
   /// Returns an integer value indicating the success of the operation.
   int getIconInfo(int hIcon, Pointer<ICONINFO> piconinfo);
 
+  /// Retrieves the color data for a bitmap and copies it into a buffer as a DIB (device-independent bitmap).
+  ///
+  /// Returns the number of scan lines copied from the bitmap.
   int getDIBits(
     int hdc,
     int hbmp,
