@@ -17,6 +17,12 @@ abstract class FileInfoWindowsFfiTypes {
   int shGetFileInfo(Pointer<Utf16> filePath, int fileAttributes,
       Pointer<SHFILEINFO> fileInfo, int fileInfoSize, int flags);
 
+  /// Retrieves information about the specified icon.
+  ///
+  /// The [hIcon] parameter specifies the handle to the icon.
+  /// The [piconinfo] parameter is a pointer to an [ICONINFO] structure that receives the icon information.
+  ///
+  /// Returns an integer value indicating the success of the operation.
   int getIconInfo(int hIcon, Pointer<ICONINFO> piconinfo);
 
   int getDIBits(
