@@ -56,6 +56,15 @@ abstract class FileInfoWindowsFfiTypes {
   /// - An integer value indicating the success of the operation.
   int destroyIcon(int hIcon);
 
+  /// Opens the Kernel32 dynamic library.
+  ///
+  /// Returns a [DynamicLibrary] object representing the opened library.
+  /// This library provides access to various Windows API functions.
+  ///
+  /// Example usage:
+  /// ```dart
+  /// DynamicLibrary kernel32 = openKernel32();
+  /// ```
   DynamicLibrary openKernel32();
 
   int findFirstFile(Pointer<Utf16> pathPtr, Pointer<WIN32_FIND_DATA> findData);
