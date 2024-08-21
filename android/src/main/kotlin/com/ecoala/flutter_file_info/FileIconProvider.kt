@@ -250,6 +250,13 @@ class FileIconProvider(private val context: Context, private val packageManager:
             bitmap
         }
     }
+
+    /**
+     * Converts a Bitmap image to a ByteArray.
+     *
+     * @param bitmap The Bitmap image to be converted.
+     * @return The ByteArray representation of the Bitmap image.
+     */
     private fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
