@@ -1,5 +1,12 @@
 package com.ecoala.flutter_file_info
 
+/**
+ * Represents a class that provides file icon data.
+ *
+ * This class contains two properties: `fileIconMap` and `mimeCategoryIconMap`.
+ * `fileIconMap` is a map that associates file extensions with their corresponding icon resource IDs.
+ * `mimeCategoryIconMap` is a map that associates MIME categories with their corresponding icon resource IDs.
+ */
 class FileIconData {
 
     companion object {
