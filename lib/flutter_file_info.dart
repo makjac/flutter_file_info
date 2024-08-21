@@ -6,4 +6,5 @@ export 'src/models/file_metadata.module.dart';
 
 export 'src/windows/enum/file_attribiutes.dart';
 
+export 'src/android/file_info_android.dart' show FileInfoAndroid;
 export 'src/windows/file_info_windows.dart' show FileInfoWindows;
