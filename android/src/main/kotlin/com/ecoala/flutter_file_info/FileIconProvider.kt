@@ -132,6 +132,13 @@ class FileIconProvider(private val context: Context, private val packageManager:
         val previewBitmap = generateImagePreview(imagePath)
         return previewBitmap?.let { BitmapDrawable(context.resources, it) }
     }
+
+    /**
+     * Generates a drawable preview of a PDF file.
+     *
+     * @param pdfPath The path of the PDF file.
+     * @return The generated drawable preview of the PDF file, or null if the preview could not be generated.
+     */
     private fun generatePdfPreviewAsDrawable(pdfPath: String): Drawable? {
         val previewBitmap = generatePdfPreview(pdfPath)
         return previewBitmap?.let { BitmapDrawable(context.resources, it) }
