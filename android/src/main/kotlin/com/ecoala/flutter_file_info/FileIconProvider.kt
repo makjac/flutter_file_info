@@ -41,6 +41,10 @@ class FileIconProvider(private val context: Context, private val packageManager:
         val extension = filePath.substringAfterLast('.', "").lowercase()
         return FileIconData.fileIconMap[extension]
     }
+    private fun generateImagePreviewAsDrawable(imagePath: String): Drawable? {
+        val previewBitmap = generateImagePreview(imagePath)
+        return previewBitmap?.let { BitmapDrawable(context.resources, it) }
+    }
     private fun generatePdfPreviewAsDrawable(pdfPath: String): Drawable? {
         val previewBitmap = generatePdfPreview(pdfPath)
         return previewBitmap?.let { BitmapDrawable(context.resources, it) }
