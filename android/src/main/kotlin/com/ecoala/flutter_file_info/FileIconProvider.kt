@@ -41,6 +41,25 @@ class FileIconProvider(private val context: Context, private val packageManager:
         val extension = filePath.substringAfterLast('.', "").lowercase()
         return FileIconData.fileIconMap[extension]
     }
+    private fun generateImagePreview(imagePath: String): Bitmap? {
+        val originalBitmap = BitmapFactory.decodeFile(imagePath) ?: return null
+
+        val maxPreviewWidth = 200
+        val maxPreviewHeight = 200
+
+        val originalWidth = originalBitmap.width
+        val originalHeight = originalBitmap.height
+
+        val scale = Math.min(
+                maxPreviewWidth.toFloat() / originalWidth,
+                maxPreviewHeight.toFloat() / originalHeight
+        )
+
+        val previewWidth = (originalWidth * scale).toInt()
+        val previewHeight = (originalHeight * scale).toInt()
+
+        return Bitmap.createScaledBitmap(originalBitmap, previewWidth, previewHeight, true)
+    }
     private fun generatePdfPreview(pdfPath: String): Bitmap? {
         var fileDescriptor: ParcelFileDescriptor? = null
         var pdfRenderer: PdfRenderer? = null
