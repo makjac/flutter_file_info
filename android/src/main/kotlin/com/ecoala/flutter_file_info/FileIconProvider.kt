@@ -262,6 +262,12 @@ class FileIconProvider(private val context: Context, private val packageManager:
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
         return stream.toByteArray()
     }
+
+    /**
+     * Returns the default icon for a file.
+     *
+     * @return The default icon as a Drawable object.
+     */
     private fun getDefaultIcon(): Drawable? {
         return context.getDrawable(R.drawable.ic_default_file)
     }
