@@ -85,7 +85,7 @@ abstract class WindowsUtils {
   String formatFileSize(int sizeInBytes);
 }
 
-class WindowsUtilsImpl extends WindowsUtils {
+class WindowsUtilsImpl implements WindowsUtils {
   @override
   String getFileType(String filePath) {
     final Pointer<SHFILEINFO> fileInfo = calloc<SHFILEINFO>();

@@ -8,13 +8,13 @@ import 'package:equatable/equatable.dart';
 /// way to access and manipulate icon information.
 class IconInfo extends Equatable {
   /// The width of the icon in pixels.
-  final int width;
+  final num width;
 
   /// The height of the icon in pixels.
-  final int height;
+  final num height;
 
   /// The color depth of the icon, indicating the number of bits per pixel.
-  final int colorDepth;
+  final num colorDepth;
 
   /// A Uint8List representing the pixel data of the icon.
   final Uint8List pixelData;
@@ -57,6 +57,15 @@ class IconInfo extends Equatable {
       height: height ?? this.height,
       colorDepth: colorDepth ?? this.colorDepth,
       pixelData: pixelData ?? this.pixelData,
+    );
+  }
+
+  factory IconInfo.fromMap(Map<String, dynamic> map) {
+    return IconInfo(
+      width: map['width'],
+      height: map['height'],
+      colorDepth: 0,
+      pixelData: map['pixelData'],
     );
   }
 
