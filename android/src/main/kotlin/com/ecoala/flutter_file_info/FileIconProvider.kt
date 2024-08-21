@@ -37,6 +37,15 @@ class FileIconProvider(private val context: Context, private val packageManager:
             }
         }
     }
+    fun getApkIcon(apkFilePath: String): Drawable? {
+        val packageInfo = packageManager.getPackageArchiveInfo(apkFilePath, PackageManager.GET_META_DATA)
+        packageInfo?.applicationInfo?.apply {
+            sourceDir = apkFilePath
+            publicSourceDir = apkFilePath
+            return loadIcon(packageManager)
+        }
+        return null
+    }
     private fun getFileMimeIcon(filePath: String): Int? {
         val extension = filePath.substringAfterLast('.', "").lowercase()
         return FileIconData.fileIconMap[extension]
