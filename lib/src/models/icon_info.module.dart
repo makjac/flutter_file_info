@@ -60,6 +60,15 @@ class IconInfo extends Equatable {
     );
   }
 
+  factory IconInfo.fromMap(Map<String, dynamic> map) {
+    return IconInfo(
+      width: map['width'],
+      height: map['height'],
+      colorDepth: 0,
+      pixelData: map['pixelData'],
+    );
+  }
+
   @override
   List<Object?> get props => [
         width,
