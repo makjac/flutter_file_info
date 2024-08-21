@@ -19,4 +19,22 @@ class FileIconProvider(private val context: Context, private val packageManager:
         val file = File(filePath)
         return file.isDirectory
     }
+    private fun getFolderIcon(): Drawable? {
+        val drawable: Drawable? = context.getDrawable(R.drawable.ic_folder)
+        return if (drawable is BitmapDrawable) {
+            drawable
+        } else {
+            drawable?.let {
+                val bitmap = Bitmap.createBitmap(
+                        it.intrinsicWidth,
+                        it.intrinsicHeight,
+                        Bitmap.Config.ARGB_8888
+                )
+                val canvas = Canvas(bitmap)
+                it.setBounds(0, 0, canvas.width, canvas.height)
+                it.draw(canvas)
+                BitmapDrawable(context.resources, bitmap)
+            }
+        }
+    }
 }
