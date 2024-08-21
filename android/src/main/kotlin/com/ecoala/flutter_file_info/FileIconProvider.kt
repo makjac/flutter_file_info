@@ -41,6 +41,14 @@ class FileIconProvider(private val context: Context, private val packageManager:
         val extension = filePath.substringAfterLast('.', "").lowercase()
         return FileIconData.fileIconMap[extension]
     }
+    private fun getCategoryIcon(filePath: String): Int? {
+        val mimeType = getMimeType(filePath)
+        mimeType?.let {
+            val category = it.substringBefore('/')
+            return FileIconData.mimeCategoryIconMap[category]
+        }
+        return null
+    }
     private fun generateImagePreviewAsDrawable(imagePath: String): Drawable? {
         val previewBitmap = generateImagePreview(imagePath)
         return previewBitmap?.let { BitmapDrawable(context.resources, it) }
