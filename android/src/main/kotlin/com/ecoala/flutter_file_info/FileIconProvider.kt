@@ -271,6 +271,12 @@ class FileIconProvider(private val context: Context, private val packageManager:
     private fun getDefaultIcon(): Drawable? {
         return context.getDrawable(R.drawable.ic_default_file)
     }
+
+    /**
+     * Checks if the given string represents an image file.
+     *
+     * @return true if the string represents an image file, false otherwise.
+     */
     private fun String.isImageFile(): Boolean {
         val imageExtensions = listOf("jpg", "jpeg", "png", "gif", "bmp", "webp")
         return imageExtensions.any { this.endsWith(it, ignoreCase = true) }
