@@ -10,6 +10,21 @@ package com.ecoala.flutter_file_info
 class FileIconData {
 
     companion object {
+        /**
+         * Map of file extensions to corresponding file icons.
+         *
+         * This map associates file extensions with their respective file icons. Each key-value pair in the map represents an extension and its corresponding icon resource ID.
+         *
+         * Example usage:
+         * ```
+         * val fileIconMap: Map<String, Int> = mapOf(
+         *     "adb" to R.drawable.ic_adb,
+         *     "apk" to R.drawable.ic_apk,
+         *     // ...
+         *     "stc" to R.drawable.ic_spreadsheet
+         * )
+         * ```
+         */
         val fileIconMap: Map<String, Int> = mapOf(
             "adb" to R.drawable.ic_adb,
             "apk" to R.drawable.ic_apk,
