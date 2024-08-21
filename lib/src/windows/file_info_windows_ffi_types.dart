@@ -47,6 +47,13 @@ abstract class FileInfoWindowsFfiTypes {
   /// The device context (DC) for the specified window.
   int getDC(int hwnd);
 
+  /// Destroys the specified icon handle.
+  ///
+  /// Parameters:
+  /// - `hIcon`: The handle to the icon to be destroyed.
+  ///
+  /// Returns:
+  /// - An integer value indicating the success of the operation.
   int destroyIcon(int hIcon);
 
   DynamicLibrary openKernel32();
