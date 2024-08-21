@@ -41,6 +41,21 @@ class FileIconProvider(private val context: Context, private val packageManager:
         val extension = filePath.substringAfterLast('.', "").lowercase()
         return FileIconData.fileIconMap[extension]
     }
+    private fun convertDrawableToBitmap(drawable: Drawable): Bitmap {
+        return if (drawable is BitmapDrawable) {
+            drawable.bitmap
+        } else {
+            val bitmap = Bitmap.createBitmap(
+                    drawable.intrinsicWidth.takeIf { it > 0 } ?: 100,
+                    drawable.intrinsicHeight.takeIf { it > 0 } ?: 100,
+                    Bitmap.Config.ARGB_8888
+            )
+            val canvas = Canvas(bitmap)
+            drawable.setBounds(0, 0, canvas.width, canvas.height)
+            drawable.draw(canvas)
+            bitmap
+        }
+    }
     private fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
