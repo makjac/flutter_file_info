@@ -145,5 +145,14 @@ class FileIconData {
             "sxc" to R.drawable.ic_spreadsheet,
             "stc" to R.drawable.ic_spreadsheet
         )
+        val mimeCategoryIconMap: Map<String, Int> = mapOf(
+            "audio" to R.drawable.ic_audio_file,
+            "video" to R.drawable.ic_video_file,
+            "text" to R.drawable.ic_text_file,
+            "message" to R.drawable.ic_message,
+            "image" to R.drawable.ic_image,
+            "inode" to R.drawable.ic_inode,
+            "font" to R.drawable.ic_font
+        )
     }
 }
