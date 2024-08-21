@@ -1,6 +1,7 @@
 import 'package:flutter_file_info/flutter_file_info.dart';
 import 'package:flutter_file_info/src/android/android_method_channel.dart';
 
+/// Represents a file information specific to Android platform.
 class FileInfoAndroid extends FileInfo {
   FileInfoAndroid({AndroidMethodChannel? androidMethodChannel})
       : _androidMethodChannel =
