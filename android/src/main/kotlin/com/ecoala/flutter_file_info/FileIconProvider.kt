@@ -169,6 +169,13 @@ class FileIconProvider(private val context: Context, private val packageManager:
 
         return Bitmap.createScaledBitmap(originalBitmap, previewWidth, previewHeight, true)
     }
+
+    /**
+     * Generates a preview bitmap for a PDF file.
+     *
+     * @param pdfPath The path of the PDF file.
+     * @return The generated bitmap preview of the PDF file, or null if an error occurred.
+     */
     private fun generatePdfPreview(pdfPath: String): Bitmap? {
         var fileDescriptor: ParcelFileDescriptor? = null
         var pdfRenderer: PdfRenderer? = null
