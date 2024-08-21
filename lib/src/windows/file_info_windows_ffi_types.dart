@@ -38,6 +38,13 @@ abstract class FileInfoWindowsFfiTypes {
     int uUsage,
   );
 
+  /// Retrieves the device context (DC) for the specified window.
+  ///
+  /// Parameters:
+  /// - `hwnd`: The handle to the window.
+  ///
+  /// Returns:
+  /// The device context (DC) for the specified window.
   int getDC(int hwnd);
 
   int destroyIcon(int hIcon);
