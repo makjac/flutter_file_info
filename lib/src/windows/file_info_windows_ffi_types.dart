@@ -9,6 +9,11 @@ import 'package:win32/win32.dart';
 /// This class provides a common interface for Windows-specific file information FFI types.
 /// It serves as a base class for other FFI types related to file information on Windows.
 abstract class FileInfoWindowsFfiTypes {
+  /// Retrieves information about a file using the Windows Shell API.
+  ///
+  /// The [filePath] parameter specifies the path to the file for which information is to be retrieved.
+  /// The [fileAttributes] parameter specifies the attributes of the file.
+  /// Returns an integer value representing the result of the operation.
   int shGetFileInfo(Pointer<Utf16> filePath, int fileAttributes,
       Pointer<SHFILEINFO> fileInfo, int fileInfoSize, int flags);
 
