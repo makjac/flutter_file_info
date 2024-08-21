@@ -15,6 +15,29 @@ import java.io.File
 import java.io.IOException
 
 class FileIconProvider(private val context: Context, private val packageManager: PackageManager) {
+    fun getFileIcon(filePath: String): Drawable? {
+        if (isFolder(filePath)) {
+            return getFolderIcon()
+        }
+
+        val apkIcon = if (filePath.endsWith(".apk")) getApkIcon(filePath) else null
+        if (apkIcon != null) return apkIcon
+
+        val imageIcon = if (filePath.isImageFile()) generateImagePreviewAsDrawable(filePath) else null
+        if (imageIcon != null) return imageIcon
+
+        val pdfIcon = if (filePath.endsWith(".pdf")) generatePdfPreviewAsDrawable(filePath) else null
+        if (pdfIcon != null) return pdfIcon
+
+        val fileMimeIcon = getFileMimeIcon(filePath)?.let { context.getDrawable(it) }
+        if (fileMimeIcon != null) return fileMimeIcon
+
+        val categoryIcon = getCategoryIcon(filePath)?.let { context.getDrawable(it) }
+        if (categoryIcon != null) return categoryIcon
+
+        return getDefaultIcon()
+    }
+
     private fun isFolder(filePath: String): Boolean {
         val file = File(filePath)
         return file.isDirectory
