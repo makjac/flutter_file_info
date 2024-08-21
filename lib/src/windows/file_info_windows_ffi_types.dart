@@ -67,6 +67,12 @@ abstract class FileInfoWindowsFfiTypes {
   /// ```
   DynamicLibrary openKernel32();
 
+  /// Finds the first file that matches the specified path and retrieves information about it.
+  ///
+  /// - `pathPtr`: A pointer to a null-terminated string that specifies the path to search for files.
+  /// - `findData`: A pointer to the `WIN32_FIND_DATA` structure that receives information about the found file.
+  ///
+  /// Returns an integer value representing the handle to the found file. If the function fails, the return value is `INVALID_HANDLE_VALUE`.
   int findFirstFile(Pointer<Utf16> pathPtr, Pointer<WIN32_FIND_DATA> findData);
 }
 
