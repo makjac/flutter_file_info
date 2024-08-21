@@ -203,6 +203,13 @@ class FileIconProvider(private val context: Context, private val packageManager:
             fileDescriptor?.close()
         }
     }
+
+    /**
+     * Retrieves the MIME type of a file based on its file path.
+     *
+     * @param filePath The file path of the file.
+     * @return The MIME type of the file, or null if the MIME type cannot be determined.
+     */
     private fun getMimeType(filePath: String): String? {
         val extension = MimeTypeMap.getFileExtensionFromUrl(filePath)
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
