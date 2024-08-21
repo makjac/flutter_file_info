@@ -37,4 +37,8 @@ class FileIconProvider(private val context: Context, private val packageManager:
             }
         }
     }
+    private fun getFileMimeIcon(filePath: String): Int? {
+        val extension = filePath.substringAfterLast('.', "").lowercase()
+        return FileIconData.fileIconMap[extension]
+    }
 }
