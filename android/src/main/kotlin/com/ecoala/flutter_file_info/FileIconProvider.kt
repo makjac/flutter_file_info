@@ -106,6 +106,13 @@ class FileIconProvider(private val context: Context, private val packageManager:
         val extension = filePath.substringAfterLast('.', "").lowercase()
         return FileIconData.fileIconMap[extension]
     }
+
+    /**
+     * Retrieves the category icon for the given file path.
+     *
+     * @param filePath The path of the file.
+     * @return The category icon for the file, or null if no icon is found.
+     */
     private fun getCategoryIcon(filePath: String): Int? {
         val mimeType = getMimeType(filePath)
         mimeType?.let {
