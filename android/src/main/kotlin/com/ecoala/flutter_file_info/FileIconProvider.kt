@@ -214,6 +214,13 @@ class FileIconProvider(private val context: Context, private val packageManager:
         val extension = MimeTypeMap.getFileExtensionFromUrl(filePath)
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
     }
+
+    /**
+     * Converts a Drawable to pixel data.
+     *
+     * @param drawable The Drawable to convert.
+     * @return A Triple containing the pixel data as a ByteArray, the width as a Double, and the height as a Double.
+     */
     fun convertDrawableToPixelData(drawable: Drawable): Triple<ByteArray, Double, Double> {
         val bitmap = convertDrawableToBitmap(drawable)
         val pixelData = bitmapToByteArray(bitmap)
