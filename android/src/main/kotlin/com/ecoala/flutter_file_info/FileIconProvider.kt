@@ -55,6 +55,12 @@ class FileIconProvider(private val context: Context, private val packageManager:
         val file = File(filePath)
         return file.isDirectory
     }
+
+    /**
+     * Retrieves the folder icon.
+     *
+     * @return The drawable representing the folder icon, or null if it cannot be retrieved.
+     */
     private fun getFolderIcon(): Drawable? {
         val drawable: Drawable? = context.getDrawable(R.drawable.ic_folder)
         return if (drawable is BitmapDrawable) {
