@@ -4,6 +4,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_file_info/flutter_file_info.dart';
 
+/// Represents an abstract class for an Android method channel.
+///
+/// This class provides a common interface for interacting with Android platform-specific code
+/// through method channels. It serves as a base class for implementing specific Android method channels.
+/// Subclasses should override the methods defined in this class to provide platform-specific functionality.
+///
+/// Example usage:
+/// ```dart
+/// class MyAndroidMethodChannel extends AndroidMethodChannel {
+///   // Implement platform-specific methods here
+/// }
+/// ```
 abstract class AndroidMethodChannel {
   Future<IconInfo> getFileIcon(String filePath);
 }
