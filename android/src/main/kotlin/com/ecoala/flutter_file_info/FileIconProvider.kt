@@ -45,6 +45,12 @@ class FileIconProvider(private val context: Context, private val packageManager:
         return getDefaultIcon()
     }
 
+    /**
+     * Determines whether the given file path represents a folder.
+     *
+     * @param filePath The file path to check.
+     * @return `true` if the file path represents a folder, `false` otherwise.
+     */
     private fun isFolder(filePath: String): Boolean {
         val file = File(filePath)
         return file.isDirectory
