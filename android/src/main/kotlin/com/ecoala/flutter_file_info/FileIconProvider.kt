@@ -95,6 +95,13 @@ class FileIconProvider(private val context: Context, private val packageManager:
         }
         return null
     }
+
+    /**
+     * Retrieves the icon associated with the file mime type of the given file path.
+     *
+     * @param filePath The path of the file.
+     * @return The resource ID of the file mime icon, or null if no icon is found.
+     */
     private fun getFileMimeIcon(filePath: String): Int? {
         val extension = filePath.substringAfterLast('.', "").lowercase()
         return FileIconData.fileIconMap[extension]
