@@ -41,6 +41,33 @@ class FileIconProvider(private val context: Context, private val packageManager:
         val extension = filePath.substringAfterLast('.', "").lowercase()
         return FileIconData.fileIconMap[extension]
     }
+    private fun generatePdfPreview(pdfPath: String): Bitmap? {
+        var fileDescriptor: ParcelFileDescriptor? = null
+        var pdfRenderer: PdfRenderer? = null
+        try {
+            fileDescriptor = ParcelFileDescriptor.open(File(pdfPath), ParcelFileDescriptor.MODE_READ_ONLY)
+            pdfRenderer = PdfRenderer(fileDescriptor)
+
+            if (pdfRenderer.pageCount < 1) {
+                return null
+            }
+
+            val page = pdfRenderer.openPage(0)
+
+            val bitmap = Bitmap.createBitmap(page.width, page.height, Bitmap.Config.ARGB_8888)
+
+            page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+
+            page.close()
+            return bitmap
+        } catch (e: IOException) {
+            e.printStackTrace()
+            return null
+        } finally {
+            pdfRenderer?.close()
+            fileDescriptor?.close()
+        }
+    }
     private fun getMimeType(filePath: String): String? {
         val extension = MimeTypeMap.getFileExtensionFromUrl(filePath)
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
