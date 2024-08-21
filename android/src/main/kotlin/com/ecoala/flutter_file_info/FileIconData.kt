@@ -167,6 +167,15 @@ class FileIconData {
             "sxc" to R.drawable.ic_spreadsheet,
             "stc" to R.drawable.ic_spreadsheet
         )
+
+        /**
+         * Map that associates mime categories with corresponding icon resources.
+         *
+         * The keys of the map represent mime categories, while the values represent the corresponding icon resources.
+         * The mime categories include "audio", "video", "text", "message", "image", "inode", and "font".
+         *
+         * @property mimeCategoryIconMap The map that associates mime categories with corresponding icon resources.
+         */
         val mimeCategoryIconMap: Map<String, Int> = mapOf(
             "audio" to R.drawable.ic_audio_file,
             "video" to R.drawable.ic_video_file,
