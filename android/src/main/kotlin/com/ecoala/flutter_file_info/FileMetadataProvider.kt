@@ -11,6 +11,39 @@ import java.text.DecimalFormat
 import java.util.*
 
 class FileMetadataProvider {
+    @TargetApi(Build.VERSION_CODES.O)
+    fun getFileMetadata(filePath: String): FileMetadata {
+        val file = File(filePath)
+        val path = Paths.get(filePath)
+        val attributes = Files.readAttributes(path, BasicFileAttributes::class.java)
+        val posixAttributes: Set<PosixFilePermission> = try {
+            Files.getPosixFilePermissions(path)
+        } catch (e: UnsupportedOperationException) {
+            emptySet()
+        }
+
+        val fileName = file.name
+        val fileExtension = file.extension.takeIf { it.isNotEmpty() }
+        val fileType = Files.probeContentType(path)
+        val creationTime = Date(attributes.creationTime().toMillis())
+        val modifiedTime = Date(attributes.lastModifiedTime().toMillis())
+        val accessedTime = Date(attributes.lastAccessTime().toMillis())
+        val sizeBytes = attributes.size()
+        val fileSize = humanReadableByteCountSI(sizeBytes)
+
+        return FileMetadata(
+            filePath = filePath,
+            fileName = fileName,
+            fileExtension = fileExtension,
+            fileType = fileType,
+            creationTime = creationTime,
+            modifiedTime = modifiedTime,
+            accessedTime = accessedTime,
+            sizeBytes = sizeBytes,
+            fileSize = fileSize,
+            attributes = posixAttributes
+        )
+    }
     fun fileMetadataToMap(metadata: FileMetadata): Map<String, Any?> {
         return mapOf(
             "filePath" to metadata.filePath,
