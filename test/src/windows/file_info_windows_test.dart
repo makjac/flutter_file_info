@@ -80,7 +80,7 @@ void main() {
       when(mockWindowsUtils.convertFileTimeToDateTime(any)).thenReturn(tDate);
       when(mockWindowsUtils.formatFileSize(any)).thenReturn('1 KB');
       when(mockWindowsUtils.getFileAttributesFromMask(any))
-          .thenReturn([FileAttributes.ARCHIVE]);
+          .thenReturn([WindowsFileAttributes.ARCHIVE]);
 
       final result = await tService.getFileInfo(filePath);
 
@@ -92,7 +92,7 @@ void main() {
       expect(result.creationTime, equals(tDate));
       expect(result.modifiedTime, equals(tDate));
       expect(result.accessedTime, equals(tDate));
-      expect(result.attributes, equals([FileAttributes.ARCHIVE]));
+      expect(result.winAttributes, equals([WindowsFileAttributes.ARCHIVE]));
     });
 
     test('getFileInfo returns null when FindFirstFile fails', () async {

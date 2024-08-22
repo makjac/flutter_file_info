@@ -27,8 +27,20 @@ class FileMetadataTable extends StatelessWidget {
     );
   }
 
+  String? _formatAttributes(FileMetadata? mtadata, TargetPlatform platform) {
+    if (platform == TargetPlatform.windows) {
+      return mtadata?.winAttributes?.map((e) => e.name).join(', ');
+    } else if (platform == TargetPlatform.android) {
+      return mtadata?.androidAttributes?.map((e) => e.name).join(', ');
+    } else {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final TargetPlatform platform = Theme.of(context).platform;
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Table(
@@ -46,7 +58,10 @@ class FileMetadataTable extends StatelessWidget {
               isHeader: true),
           _buildRow('Size (Bytes)', fileMetadata?.sizeBytes?.toString()),
           _buildRow('File Size', fileMetadata?.fileSize, isHeader: true),
-          _buildRow("Attributes", fileMetadata?.attributes?.toString()),
+          _buildRow(
+            "Attributes",
+            _formatAttributes(fileMetadata, platform),
+          ),
         ],
       ),
     );
