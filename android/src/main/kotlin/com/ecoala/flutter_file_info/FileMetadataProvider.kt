@@ -75,6 +75,13 @@ class FileMetadataProvider {
             "androidAttributes" to metadata.attributes?.map { it.name }
         )
     }
+
+    /**
+     * Converts the given number of bytes into a human-readable string representation using the International System of Units (SI).
+     *
+     * @param bytes The number of bytes to convert.
+     * @return A string representation of the given number of bytes in a human-readable format.
+     */
     private fun humanReadableByteCountSI(bytes: Long): String {
         val unit = 1000
         if (bytes < unit) return "$bytes B"
