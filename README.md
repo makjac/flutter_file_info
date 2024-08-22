@@ -59,6 +59,10 @@ if (_fileMetatdata != null) {
 
 ![windows_example](https://i.imgur.com/Yo0GhFM.gif)
 
+### Android
+
+![android_example](https://i.imgur.com/EKQ3WDK.gif)
+
 ## Contributing
 
 If you would like to contribute to the development of this plugin, please fork the repository and submit a pull request. For detailed contribution guidelines, please refer to the CONTRIBUTING.md file.
