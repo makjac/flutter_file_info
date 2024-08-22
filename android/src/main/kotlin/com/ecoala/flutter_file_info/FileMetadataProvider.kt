@@ -25,4 +25,11 @@ class FileMetadataProvider {
             "androidAttributes" to metadata.attributes?.map { it.name }
         )
     }
+    private fun humanReadableByteCountSI(bytes: Long): String {
+        val unit = 1000
+        if (bytes < unit) return "$bytes B"
+        val exp = (Math.log(bytes.toDouble()) / Math.log(unit.toDouble())).toInt()
+        val pre = "kMGTPE"[exp - 1].toString()
+        return DecimalFormat("#,##0.#").format(bytes / Math.pow(unit.toDouble(), exp.toDouble())) + " " + pre + "B"
+    }
 }
