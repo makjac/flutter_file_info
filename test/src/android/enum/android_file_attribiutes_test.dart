@@ -54,5 +54,12 @@ void main() {
           ]));
       expect(result.length, 2);
     });
+
+    test('returns empty set for empty input', () {
+      final result =
+          AndroidFileAttributesUtility.parseAndroidFileAttributes([]);
+
+      expect(result, isEmpty);
+    });
   });
 }
