@@ -46,5 +46,26 @@ void main() {
       expect(iconInfo.width, 100.0);
       expect(iconInfo.height, 200.0);
     });
+
+    test('getFileIcon throws an exception on invalid base64', () async {
+      // Przygotowanie danych
+      const filePath = 'test/path';
+      final result = {
+        'pixelData': 'invalid_base64',
+        'width': 100.0,
+        'height': 200.0,
+      };
+
+      // Mockowanie odpowiedzi
+      when(mockMethodChannel
+              .invokeMethod('getFileIcon', {'filePath': filePath}))
+          .thenAnswer((_) async => result);
+
+      // Wywołanie metody i sprawdzanie, czy rzuca wyjątek
+      expect(
+        () async => await androidMethodChannelImpl.getFileIcon(filePath),
+        throwsA(isA<Exception>()),
+      );
+    });
   });
 }
