@@ -2,18 +2,18 @@
 
 import 'package:win32/win32.dart';
 
-/// Enumeration representing file attributes commonly used in Windows systems.
+/// Enumeration representing file attributes specific to the Windows operating system.
 ///
-/// This enum provides a set of constants that describe various attributes associated with files and directories on the Windows operating system.
+/// This enum provides a set of constants that describe various attributes associated with files and directories on Windows.
 /// Each constant represents a specific attribute, such as read-only, hidden, system, etc.
 ///
 /// Usage:
 /// ```dart
-/// FileAttributes attribute = FileAttributes.READ_ONLY;
+/// WindowsFileAttributes attribute = WindowsFileAttributes.READ_ONLY;
 /// print('Value of READ_ONLY attribute: ${attribute.value}');
 /// ```
-enum FileAttributes {
-  /// A file that is marked as read-only. Applications can read the file, but cannot write to it or delete it.
+enum WindowsFileAttributes {
+  /// A file that is marked as read-only. Applications can read the file but cannot write to it or delete it.
   READ_ONLY,
 
   /// The file or directory is marked as hidden and is not included in an ordinary directory listing.
@@ -74,53 +74,55 @@ enum FileAttributes {
   RECALL_ON_DATA_ACCESS,
 }
 
-/// Extension methods for the [FileAttributes] enum.
+/// Extension methods for the [WindowsFileAttributes] enum.
+///
+/// This extension provides methods to get the corresponding numerical values for the file attributes defined in the [WindowsFileAttributes] enum.
 ///
 /// See also:
 /// - [File Attribute Constants](https://learn.microsoft.com/en-us/windows/win32/fileio/file-attribute-constants)
-extension FileAttributesExtension on FileAttributes {
+extension WindowsFileAttributesExtension on WindowsFileAttributes {
   /// Returns the corresponding numerical value for the Windows file attribute.
   int get value {
     switch (this) {
-      case FileAttributes.READ_ONLY:
+      case WindowsFileAttributes.READ_ONLY:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_READONLY;
-      case FileAttributes.HIDDEN:
+      case WindowsFileAttributes.HIDDEN:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_HIDDEN;
-      case FileAttributes.SYSTEM:
+      case WindowsFileAttributes.SYSTEM:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_SYSTEM;
-      case FileAttributes.DIRECTORY:
+      case WindowsFileAttributes.DIRECTORY:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_DIRECTORY;
-      case FileAttributes.ARCHIVE:
+      case WindowsFileAttributes.ARCHIVE:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_ARCHIVE;
-      case FileAttributes.DEVICE:
+      case WindowsFileAttributes.DEVICE:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_DEVICE;
-      case FileAttributes.NORMAL:
+      case WindowsFileAttributes.NORMAL:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL;
-      case FileAttributes.TEMPORARY:
+      case WindowsFileAttributes.TEMPORARY:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_TEMPORARY;
-      case FileAttributes.SPARSE_FILE:
+      case WindowsFileAttributes.SPARSE_FILE:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_SPARSE_FILE;
-      case FileAttributes.REPARSE_POINT:
+      case WindowsFileAttributes.REPARSE_POINT:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_REPARSE_POINT;
-      case FileAttributes.COMPRESSED:
+      case WindowsFileAttributes.COMPRESSED:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_COMPRESSED;
-      case FileAttributes.OFFLINE:
+      case WindowsFileAttributes.OFFLINE:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_OFFLINE;
-      case FileAttributes.NOT_CONTENT_INDEXED:
+      case WindowsFileAttributes.NOT_CONTENT_INDEXED:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NOT_CONTENT_INDEXED;
-      case FileAttributes.ENCRYPTED:
+      case WindowsFileAttributes.ENCRYPTED:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_ENCRYPTED;
-      case FileAttributes.VIRTUAL:
+      case WindowsFileAttributes.VIRTUAL:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_VIRTUAL;
-      case FileAttributes.EA:
+      case WindowsFileAttributes.EA:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_EA;
-      case FileAttributes.PINNED:
+      case WindowsFileAttributes.PINNED:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_PINNED;
-      case FileAttributes.UNPINNED:
+      case WindowsFileAttributes.UNPINNED:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_UNPINNED;
-      case FileAttributes.RECALL_ON_OPEN:
+      case WindowsFileAttributes.RECALL_ON_OPEN:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_RECALL_ON_OPEN;
-      case FileAttributes.RECALL_ON_DATA_ACCESS:
+      case WindowsFileAttributes.RECALL_ON_DATA_ACCESS:
         return FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS;
     }
   }
