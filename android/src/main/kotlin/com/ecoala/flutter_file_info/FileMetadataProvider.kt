@@ -10,6 +10,9 @@ import java.nio.file.attribute.PosixFilePermission
 import java.text.DecimalFormat
 import java.util.*
 
+/**
+ * This class is responsible for providing file metadata.
+ */
 class FileMetadataProvider {
     @TargetApi(Build.VERSION_CODES.O)
     fun getFileMetadata(filePath: String): FileMetadata {
