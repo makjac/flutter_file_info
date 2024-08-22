@@ -70,5 +70,25 @@ void main() {
 
       expect(result, isEmpty);
     });
+
+    test('handles mixed valid and invalid attribute names', () {
+      final attributeNames = [
+        'OWNER_EXECUTE',
+        'INVALID',
+        'OTHERS_READ',
+        'ANOTHER_INVALID'
+      ];
+
+      final result = AndroidFileAttributesUtility.parseAndroidFileAttributes(
+          attributeNames);
+
+      expect(
+          result,
+          containsAll([
+            AndroidFileAttributes.OWNER_EXECUTE,
+            AndroidFileAttributes.OTHERS_READ
+          ]));
+      expect(result.length, 2);
+    });
   });
 }
