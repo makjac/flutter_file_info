@@ -14,6 +14,13 @@ import java.util.*
  * This class is responsible for providing file metadata.
  */
 class FileMetadataProvider {
+
+    /**
+     * Retrieves the metadata of a file specified by the given file path.
+     *
+     * @param filePath The path of the file.
+     * @return The metadata of the file.
+     */
     @TargetApi(Build.VERSION_CODES.O)
     fun getFileMetadata(filePath: String): FileMetadata {
         val file = File(filePath)
