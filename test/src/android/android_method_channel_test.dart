@@ -67,5 +67,51 @@ void main() {
         throwsA(isA<Exception>()),
       );
     });
+
+    test('getFileInfo returns correct FileMetadata', () async {
+      // Przygotowanie danych
+      const filePath = 'test/path';
+      final result = {
+        'filePath': filePath,
+        'fileName': 'testFile',
+        'fileExtension': 'txt',
+        'fileType': 'Text Document',
+        'creationTime': 1633036800000,
+        'modifiedTime': 1633123200000,
+        'accessedTime': 1633209600000,
+        'sizeBytes': 12345,
+        'fileSize': '12.3 KB',
+        'androidAttributes': [
+          'OWNER_WRITE',
+          'GROUP_READ',
+        ],
+      };
+
+      // Mockowanie odpowiedzi
+      when(mockMethodChannel
+              .invokeMethod('getFileInfo', {'filePath': filePath}))
+          .thenAnswer((_) async => result);
+
+      // Wywołanie metody
+      final fileMetadata = await androidMethodChannelImpl.getFileInfo(filePath);
+
+      // Sprawdzanie wyników
+      expect(fileMetadata.filePath, filePath);
+      expect(fileMetadata.fileName, 'testFile');
+      expect(fileMetadata.fileExtension, 'txt');
+      expect(fileMetadata.fileType, 'Text Document');
+      expect(fileMetadata.creationTime,
+          DateTime.fromMillisecondsSinceEpoch(1633036800000));
+      expect(fileMetadata.modifiedTime,
+          DateTime.fromMillisecondsSinceEpoch(1633123200000));
+      expect(fileMetadata.accessedTime,
+          DateTime.fromMillisecondsSinceEpoch(1633209600000));
+      expect(fileMetadata.sizeBytes, 12345);
+      expect(fileMetadata.fileSize, '12.3 KB');
+      expect(fileMetadata.androidAttributes, [
+        AndroidFileAttributes.OWNER_WRITE,
+        AndroidFileAttributes.GROUP_READ,
+      ]);
+    });
   });
 }
