@@ -21,11 +21,20 @@ abstract class AndroidMethodChannel {
   ///
   /// Returns a [Future] that completes with an [IconInfo] object containing the icon information.
   Future<IconInfo> getFileIcon(String filePath);
+
+  /// Retrieves the file metadata for a file located at the specified [filePath].
+  ///
+  /// Returns a [Future] that completes with a [FileMetadata] object containing the file metadata.
+  Future<FileMetadata> getFileInfo(String filePath);
 }
 
 class AndroidMethodChannelImpl implements AndroidMethodChannel {
+  AndroidMethodChannelImpl({MethodChannel? methodChannel})
+      : methodChannel =
+            methodChannel ?? const MethodChannel('flutter_file_info');
+
   @visibleForTesting
-  final methodChannel = const MethodChannel('flutter_file_info');
+  final MethodChannel methodChannel;
 
   @override
   Future<IconInfo> getFileIcon(String filePath) async {
@@ -53,5 +62,36 @@ class AndroidMethodChannelImpl implements AndroidMethodChannel {
       'width': width,
       'height': height,
     });
+  }
+
+  @override
+  Future<FileMetadata> getFileInfo(String filePath) async {
+    final result =
+        await methodChannel.invokeMethod('getFileInfo', {'filePath': filePath});
+
+    final Map<String, dynamic> data = Map<String, dynamic>.from(result);
+
+    return FileMetadata(
+      filePath: data['filePath'] as String,
+      fileName: data['fileName'] as String?,
+      fileExtension: data['fileExtension'] as String?,
+      fileType: data['fileType'] as String?,
+      creationTime: data['creationTime'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(data['creationTime'] as int)
+          : null,
+      modifiedTime: data['modifiedTime'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(data['modifiedTime'] as int)
+          : null,
+      accessedTime: data['accessedTime'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(data['accessedTime'] as int)
+          : null,
+      sizeBytes: data['sizeBytes'] as int?,
+      fileSize: data['fileSize'] as String?,
+      androidAttributes:
+          AndroidFileAttributesUtility.parseAndroidFileAttributes(
+                  List<String>.from(data['androidAttributes'] as List<dynamic>))
+              .toList(),
+      // Note: winAttributes is not being set here. You may need to handle it similarly if needed.
+    );
   }
 }
