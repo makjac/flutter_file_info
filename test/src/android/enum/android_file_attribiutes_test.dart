@@ -34,5 +34,25 @@ void main() {
           ]));
       expect(result.length, 9);
     });
+
+    test('ignores invalid attribute names', () {
+      final attributeNames = [
+        'GROUP_EXECUTE',
+        'INVALID_ATTRIBUTE',
+        'OWNER_WRITE',
+        'ANOTHER_INVALID'
+      ];
+
+      final result = AndroidFileAttributesUtility.parseAndroidFileAttributes(
+          attributeNames);
+
+      expect(
+          result,
+          containsAll([
+            AndroidFileAttributes.GROUP_EXECUTE,
+            AndroidFileAttributes.OWNER_WRITE
+          ]));
+      expect(result.length, 2);
+    });
   });
 }
