@@ -35,7 +35,16 @@ class FileMetadata extends Equatable {
   /// The list of Windows file attributes.
   final List<WindowsFileAttributes>? winAttributes;
 
-  /// Creates a new instance of [FileMetadata] with the specified parameters.
+  /// The list of Android file attributes.
+  final List<AndroidFileAttributes>? androidAttributes;
+
+  /// Represents the metadata of a file.
+  ///
+  /// This class contains information about the attributes of a file.
+  /// The [winAttributes] property is a list of [WindowsFileAttributes] that represents
+  /// the Windows-specific attributes of the file.
+  /// The [androidAttributes] property is a list of [AndroidFileAttributes] that represents
+  /// the Android-specific attributes of the file.
   const FileMetadata({
     required this.filePath,
     this.fileName,
@@ -48,6 +57,7 @@ class FileMetadata extends Equatable {
     this.fileSize,
     this.dwFileAttributes,
     this.winAttributes,
+    this.androidAttributes,
   });
 
   /// Returns a string representation of the [FileMetadata] object.
@@ -64,6 +74,7 @@ class FileMetadata extends Equatable {
       'fileSize: $fileSize, '
       'dwFileAttributes: $dwFileAttributes, '
       'winAttributes: $winAttributes, '
+      'androidAttributes: $androidAttributes)';
 
   /// Creates a new [FileMetadata] object with updated values based on the provided parameters.
   ///
@@ -80,6 +91,7 @@ class FileMetadata extends Equatable {
     String? fileSize,
     int? dwFileAttributes,
     List<WindowsFileAttributes>? winAttributes,
+    List<AndroidFileAttributes>? androidAttributes,
   }) {
     return FileMetadata(
       filePath: filePath ?? this.filePath,
@@ -93,6 +105,7 @@ class FileMetadata extends Equatable {
       fileSize: fileSize ?? this.fileSize,
       dwFileAttributes: dwFileAttributes ?? this.dwFileAttributes,
       winAttributes: winAttributes ?? this.winAttributes,
+      androidAttributes: androidAttributes ?? this.androidAttributes,
     );
   }
 
@@ -110,5 +123,6 @@ class FileMetadata extends Equatable {
         fileSize,
         dwFileAttributes,
         winAttributes,
+        androidAttributes,
       ];
 }
