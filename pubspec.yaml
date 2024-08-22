@@ -1,6 +1,6 @@
 name: flutter_file_info
 description: "A Flutter plugin for retrieving detailed file metadata, including native icons."
-version: 0.0.2
+version: 0.1.0
 homepage: https://github.com/makjac/flutter_file_info
 repository: https://github.com/makjac/flutter_file_info
 issue_tracker: https://github.com/makjac/flutter_file_info/issues
