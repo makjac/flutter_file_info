@@ -61,5 +61,14 @@ void main() {
 
       expect(result, isEmpty);
     });
+
+    test('returns empty set for all invalid names', () {
+      final attributeNames = ['INVALID', 'ANOTHER_INVALID'];
+
+      final result = AndroidFileAttributesUtility.parseAndroidFileAttributes(
+          attributeNames);
+
+      expect(result, isEmpty);
+    });
   });
 }
