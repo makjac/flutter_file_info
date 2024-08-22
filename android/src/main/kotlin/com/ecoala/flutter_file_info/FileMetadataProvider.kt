@@ -54,6 +54,13 @@ class FileMetadataProvider {
             attributes = posixAttributes
         )
     }
+
+    /**
+     * Converts the given [FileMetadata] object to a map representation.
+     *
+     * @param metadata The [FileMetadata] object to convert.
+     * @return A map containing the metadata of the file.
+     */
     fun fileMetadataToMap(metadata: FileMetadata): Map<String, Any?> {
         return mapOf(
             "filePath" to metadata.filePath,
