@@ -38,5 +38,31 @@ void main() {
       expect(result, iconInfo);
       verify(mockAndroidMethodChannel.getFileIcon(filePath)).called(1);
     });
+
+    test('should return FileMetadata from getFileInfo', () async {
+      const filePath = 'test/path';
+      final fileMetadata = FileMetadata(
+        filePath: filePath,
+        fileName: 'file',
+        fileExtension: 'txt',
+        fileType: 'Text File',
+        creationTime: DateTime.now(),
+        modifiedTime: DateTime.now(),
+        accessedTime: DateTime.now(),
+        sizeBytes: 1234,
+        fileSize: '1.2 KB',
+        dwFileAttributes: 0,
+        winAttributes: const [],
+      );
+
+      when(mockAndroidMethodChannel.getFileInfo(filePath))
+          .thenAnswer((_) async => fileMetadata);
+
+      final result = await fileInfoAndroid.getFileInfo(filePath);
+
+      expect(result, isNotNull);
+      expect(result, fileMetadata);
+      verify(mockAndroidMethodChannel.getFileInfo(filePath)).called(1);
+    });
   });
 }
