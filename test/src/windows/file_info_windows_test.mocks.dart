@@ -6,7 +6,7 @@
 import 'dart:ffi' as _i3;
 
 import 'package:ffi/ffi.dart' as _i4;
-import 'package:flutter_file_info/src/windows/enum/file_attribiutes.dart'
+import 'package:flutter_file_info/src/windows/enum/windows_file_attribiutes.dart'
     as _i8;
 import 'package:flutter_file_info/src/windows/file_info_windows_ffi_types.dart'
     as _i2;
@@ -201,14 +201,15 @@ class MockWindowsUtils extends _i1.Mock implements _i7.WindowsUtils {
       ) as DateTime);
 
   @override
-  List<_i8.FileAttributes> getFileAttributesFromMask(int? attributeMask) =>
+  List<_i8.WindowsFileAttributes> getFileAttributesFromMask(
+          int? attributeMask) =>
       (super.noSuchMethod(
         Invocation.method(
           #getFileAttributesFromMask,
           [attributeMask],
         ),
-        returnValue: <_i8.FileAttributes>[],
-      ) as List<_i8.FileAttributes>);
+        returnValue: <_i8.WindowsFileAttributes>[],
+      ) as List<_i8.WindowsFileAttributes>);
 
   @override
   String formatFileSize(int? sizeInBytes) => (super.noSuchMethod(

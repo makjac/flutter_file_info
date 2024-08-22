@@ -8,3 +8,10 @@
 ## 0.0.2
 
 * fix: fix headers in code example sections
+
+## 0.1.0
+
+* feat: Support for Android platform. Methods `getFileInfo` and `getFileIconInfo` now work on Android
+* feat: `AndroidFileAttributes` enum for Android-specific file permissions
+* refactor: Renamed `attributes` to `winAttributes` in `FileMetadata`
+* feat: Added `androidAttributes` for Android-specific attributes in `FileMetadata`

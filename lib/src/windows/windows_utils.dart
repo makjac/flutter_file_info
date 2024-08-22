@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:flutter_file_info/src/windows/enum/file_attribiutes.dart';
+import 'package:flutter_file_info/src/windows/enum/windows_file_attribiutes.dart';
 import 'package:win32/win32.dart';
 
 abstract class WindowsUtils {
@@ -48,10 +48,10 @@ abstract class WindowsUtils {
   /// - [FILETIME documentation](https://docs.microsoft.com/en-us/windows/win32/api/minwinbase/ns-minwinbase-filetime)
   DateTime convertFileTimeToDateTime(FILETIME fileTime);
 
-  /// Converts a numerical attribute mask into a list of [FileAttributes].
+  /// Converts a numerical attribute mask into a list of [WindowsFileAttributes].
   ///
-  /// This function takes a numerical attribute mask as input and converts it into a list of [FileAttributes],
-  /// representing the individual attributes that are set in the mask. Each attribute in the [FileAttributes] enum
+  /// This function takes a numerical attribute mask as input and converts it into a list of [WindowsFileAttributes],
+  /// representing the individual attributes that are set in the mask. Each attribute in the [WindowsFileAttributes] enum
   /// corresponds to a specific bit in the attribute mask.
   ///
   /// Example usage:
@@ -63,7 +63,7 @@ abstract class WindowsUtils {
   ///
   /// Note: This function is useful for extracting individual attributes from a numerical bitmask, providing a more
   /// convenient representation for understanding the file's characteristics.
-  List<FileAttributes> getFileAttributesFromMask(int attributeMask);
+  List<WindowsFileAttributes> getFileAttributesFromMask(int attributeMask);
 
   /// Formats a file size in bytes into a human-readable string representation.
   ///
@@ -112,10 +112,10 @@ class WindowsUtilsImpl implements WindowsUtils {
   }
 
   @override
-  List<FileAttributes> getFileAttributesFromMask(int attributeMask) {
-    List<FileAttributes> attributes = [];
+  List<WindowsFileAttributes> getFileAttributesFromMask(int attributeMask) {
+    List<WindowsFileAttributes> attributes = [];
 
-    for (var attr in FileAttributes.values) {
+    for (var attr in WindowsFileAttributes.values) {
       if (attributeMask & attr.value != 0) {
         attributes.add(attr);
       }

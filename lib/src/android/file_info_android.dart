@@ -19,6 +19,7 @@ class FileInfoAndroid extends FileInfo {
   }
 
   @override
-  Future<FileMetadata?> getFileInfo(String filePath) =>
-      throw UnimplementedError('getFileInfo() has not been implemented.');
+  Future<FileMetadata?> getFileInfo(String filePath) async {
+    return await _androidMethodChannel.getFileInfo(filePath);
+  }
 }

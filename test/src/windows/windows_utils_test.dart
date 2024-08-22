@@ -1,4 +1,4 @@
-import 'package:flutter_file_info/src/windows/enum/file_attribiutes.dart';
+import 'package:flutter_file_info/src/windows/enum/windows_file_attribiutes.dart';
 import 'package:flutter_file_info/src/windows/windows_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -22,11 +22,11 @@ void main() {
       expect(
           attributes,
           containsAll([
-            FileAttributes.READ_ONLY,
-            FileAttributes.SYSTEM,
-            FileAttributes.ARCHIVE,
+            WindowsFileAttributes.READ_ONLY,
+            WindowsFileAttributes.SYSTEM,
+            WindowsFileAttributes.ARCHIVE,
           ]));
-      expect(attributes, isNot(contains(FileAttributes.HIDDEN)));
+      expect(attributes, isNot(contains(WindowsFileAttributes.HIDDEN)));
     });
 
     test('formatFileSize formats file size correctly', () {

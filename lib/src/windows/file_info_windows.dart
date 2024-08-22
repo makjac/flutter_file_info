@@ -231,7 +231,7 @@ class FileInfoWindows extends FileInfo {
       sizeBytes: findData.ref.nFileSizeLow,
       fileSize: fileSize,
       dwFileAttributes: findData.ref.dwFileAttributes,
-      attributes: attributes,
+      winAttributes: attributes,
     );
   }
 }

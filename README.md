@@ -16,7 +16,7 @@ A Flutter plugin for retrieving detailed file metadata, including native icons. 
 | API                   | Android            | iOS                | Linux              | macOS              | Windows            | Web                |
 | --------------------- | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
 | getFileIconInfo()     | :heavy_check_mark: | :x:                | :x:                | :x:                | :heavy_check_mark: | :x:                |
-| getFileInfo()         | :x:                | :x:                | :x:                | :x:                | :heavy_check_mark: | :x:                |
+| getFileInfo()         | :heavy_check_mark: | :x:                | :x:                | :x:                | :heavy_check_mark: | :x:                |
 
 ## Getting Started
 
@@ -58,6 +58,10 @@ if (_fileMetatdata != null) {
 ### Windows
 
 ![windows_example](https://i.imgur.com/Yo0GhFM.gif)
+
+### Android
+
+![android_example](https://i.imgur.com/EKQ3WDK.gif)
 
 ## Contributing
 
