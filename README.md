@@ -45,10 +45,10 @@ Widget _buildFileIcon() {
 FileMetadata? _fileMetatdata = await FileInfo.instance.getFileInfo('path/to/example/file.txt');
 
 if (_fileMetatdata != null) {
-    pritn(fileMetadata.fileName);                    // Output: file.txt
-    pritn(fileMetadata.fileExtension);               // Output: txt
-    pritn(fileMetadata.fileType);                    // Output: TextDocument
-    pritn(fileMetadata.creationTime?.toString());    // Output: 2024-08-01 17:16:26.500018
+    print(fileMetadata.fileName);                    // Output: file.txt
+    print(fileMetadata.fileExtension);               // Output: txt
+    print(fileMetadata.fileType);                    // Output: TextDocument
+    print(fileMetadata.creationTime?.toString());    // Output: 2024-08-01 17:16:26.500018
     // ...
 }
 ```
