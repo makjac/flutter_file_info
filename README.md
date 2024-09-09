@@ -2,6 +2,7 @@
 
 [![Flutter Windows Tests][ci_badge]][ci_badge_link]
 [![pub package][pub_badge]][pub_badge_link]
+[![pub likes][pub_likes_badge]][pub_likes_link]
 [![License: MIT][license_badge]][license_badge_link]
 
 # flutter_file_info
@@ -82,6 +83,8 @@ This plugin is licensed under the [MIT License][mit_license_url].
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license_badge_link]: https://opensource.org/licenses/MIT
 
+[pub_likes_badge]: https://img.shields.io/pub/likes/flutter_file_info
+[pub_likes_link]: https://pub.dev/packages/flutter_file_info
 
 [pub_badge]: https://img.shields.io/pub/v/flutter_file_info.svg
 [pub_badge_link]: https://pub.dev/packages/flutter_file_info
