@@ -1,6 +1,8 @@
-![header](https://i.imgur.com/5uioqZd.png)
+![header][header_image_url]
 
-[![Flutter Windows Tests](https://github.com/makjac/flutter_file_info/actions/workflows/windows.yml/badge.svg)](https://github.com/makjac/flutter_file_info/actions/workflows/windows.yml)
+[![Flutter Windows Tests][ci_badge]][ci_badge_link]
+[![pub package][pub_badge]][pub_badge_link]
+[![License: MIT][license_badge]][license_badge_link]
 
 # flutter_file_info
 
@@ -57,11 +59,11 @@ if (_fileMetatdata != null) {
 
 ### Windows
 
-![windows_example](https://i.imgur.com/Yo0GhFM.gif)
+![windows_example][windows_example_url]
 
 ### Android
 
-![android_example](https://i.imgur.com/EKQ3WDK.gif)
+![android_example][android_example_url]
 
 ## Contributing
 
@@ -69,4 +71,23 @@ If you would like to contribute to the development of this plugin, please fork t
 
 ## License
 
-This plugin is licensed under the [MIT License](https://github.com/makjac/flutter_file_info/blob/main/LICENSE).
+This plugin is licensed under the [MIT License][mit_license_url].
+
+
+<!-- end:excluded_rules_table -->
+
+[ci_badge]: https://github.com/VeryGoodOpenSource/very_good_analysis/workflows/ci/badge.svg
+[ci_badge_link]: https://github.com/makjac/flutter_file_info/actions/workflows/windows.yml
+
+[license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[license_badge_link]: https://opensource.org/licenses/MIT
+
+
+[pub_badge]: https://img.shields.io/pub/v/flutter_file_info.svg
+[pub_badge_link]: https://pub.dev/packages/flutter_file_info
+
+[mit_license_url]: https://github.com/makjac/flutter_file_info/blob/main/LICENSE
+
+[header_image_url]: https://i.imgur.com/5uioqZd.png
+[windows_example_url]: https://i.imgur.com/Yo0GhFM.gif
+[android_example_url]: https://i.imgur.com/EKQ3WDK.gif
