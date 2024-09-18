@@ -9,10 +9,8 @@ import 'package:flutter_file_info/src/android/android_method_channel.dart';
 
 import 'android_method_channel_test.mocks.dart';
 
-// Generowanie mocków
 @GenerateMocks([MethodChannel])
 void main() {
-  // Mocks
   late MockMethodChannel mockMethodChannel;
   late AndroidMethodChannelImpl androidMethodChannelImpl;
 
@@ -24,7 +22,6 @@ void main() {
 
   group('AndroidMethodChannelImpl', () {
     test('getFileIcon returns correct IconInfo', () async {
-      // Przygotowanie danych
       const filePath = 'test/path';
       final pixelData = base64.encode(Uint8List.fromList([0, 1, 2, 3]));
       final result = {
@@ -33,22 +30,18 @@ void main() {
         'height': 200.0,
       };
 
-      // Mockowanie odpowiedzi
       when(mockMethodChannel
               .invokeMethod('getFileIcon', {'filePath': filePath}))
           .thenAnswer((_) async => result);
 
-      // Wywołanie metody
       final iconInfo = await androidMethodChannelImpl.getFileIcon(filePath);
 
-      // Sprawdzanie wyników
       expect(iconInfo.pixelData, Uint8List.fromList([0, 1, 2, 3]));
       expect(iconInfo.width, 100.0);
       expect(iconInfo.height, 200.0);
     });
 
     test('getFileIcon throws an exception on invalid base64', () async {
-      // Przygotowanie danych
       const filePath = 'test/path';
       final result = {
         'pixelData': 'invalid_base64',
@@ -56,12 +49,10 @@ void main() {
         'height': 200.0,
       };
 
-      // Mockowanie odpowiedzi
       when(mockMethodChannel
               .invokeMethod('getFileIcon', {'filePath': filePath}))
           .thenAnswer((_) async => result);
 
-      // Wywołanie metody i sprawdzanie, czy rzuca wyjątek
       expect(
         () async => await androidMethodChannelImpl.getFileIcon(filePath),
         throwsA(isA<Exception>()),
@@ -69,7 +60,6 @@ void main() {
     });
 
     test('getFileInfo returns correct FileMetadata', () async {
-      // Przygotowanie danych
       const filePath = 'test/path';
       final result = {
         'filePath': filePath,
@@ -87,15 +77,12 @@ void main() {
         ],
       };
 
-      // Mockowanie odpowiedzi
       when(mockMethodChannel
               .invokeMethod('getFileInfo', {'filePath': filePath}))
           .thenAnswer((_) async => result);
 
-      // Wywołanie metody
       final fileMetadata = await androidMethodChannelImpl.getFileInfo(filePath);
 
-      // Sprawdzanie wyników
       expect(fileMetadata.filePath, filePath);
       expect(fileMetadata.fileName, 'testFile');
       expect(fileMetadata.fileExtension, 'txt');
