@@ -91,6 +91,6 @@ This plugin is licensed under the [MIT License][mit_license_url].
 
 [mit_license_url]: https://github.com/makjac/flutter_file_info/blob/main/LICENSE
 
-[header_image_url]: https://i.imgur.com/5uioqZd.png
-[windows_example_url]: https://i.imgur.com/Yo0GhFM.gif
-[android_example_url]: https://i.imgur.com/EKQ3WDK.gif
+[header_image_url]: https://raw.githubusercontent.com/makjac/images/refs/heads/main/flutter_file_info/flutter_file_info_banner.png
+[windows_example_url]: https://raw.githubusercontent.com/makjac/images/refs/heads/main/flutter_file_info/file_info_win.gif
+[android_example_url]: https://raw.githubusercontent.com/makjac/images/refs/heads/main/flutter_file_info/flutter_file_info_android.gif
