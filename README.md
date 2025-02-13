@@ -62,7 +62,7 @@ if (_fileMetatdata != null) {
 
 ![windows_example][windows_example_url]
 
-## MacOS
+### MacOS
 
 ![macos_example][macos_example_url]
 
