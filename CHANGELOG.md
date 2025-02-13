@@ -1,13 +1,11 @@
-## 0.0.1
+## 0.2.0
 
-* Initial Release: Created the flutter_file_info plugin.
-* Platform Support: Initial release supports only Windows.
-* getFileInfo: Retrieves detailed metadata about a file specified by [filePath].
-* getFileIconInfo: Retrieves icon information for a file or directory specified by [filePath].
+* feat: Support for MacOS platform. Methods `getFileInfo` and `getFileIconInfo` now work on MacOS
+* feat: `MacosFileAttribute` enum for MacOS-specific file attributes
 
-## 0.0.2
+## 0.1.1
 
-* fix: fix headers in code example sections
+* Correct image URLs in `README.md`
 
 ## 0.1.0
 
@@ -16,11 +14,13 @@
 * refactor: Renamed `attributes` to `winAttributes` in `FileMetadata`
 * feat: Added `androidAttributes` for Android-specific attributes in `FileMetadata`
 
-## 0.1.1
+## 0.0.2
 
-* Correct image URLs in `README.md`
+* fix: fix headers in code example sections
 
-## 0.2.0
+## 0.0.1
 
-* feat: Support for MacOS platform. Methods `getFileInfo` and `getFileIconInfo` now work on MacOS
-* feat: `MacosFileAttribute` enum for MacOS-specific file attributes
+* Initial Release: Created the flutter_file_info plugin.
+* Platform Support: Initial release supports only Windows.
+* getFileInfo: Retrieves detailed metadata about a file specified by [filePath].
+* getFileIconInfo: Retrieves icon information for a file or directory specified by [filePath].
