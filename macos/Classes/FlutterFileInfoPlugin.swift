@@ -15,7 +15,7 @@ public class FlutterFileInfoPlugin: NSObject, FlutterPlugin {
       guard let args = call.arguments as? [String: Any],
         let path = args["filePath"] as? String
       else {
-        result(FlutterError(code: "INVALID_ARGS", message: "Brak ścieżki pliku", details: nil))
+        result(FlutterError(code: "INVALID_ARGS", message: "No file path", details: nil))
         return
       }
 
@@ -30,7 +30,7 @@ public class FlutterFileInfoPlugin: NSObject, FlutterPlugin {
         let pngData = bitmapImage.representation(using: .png, properties: [:])
       else {
         result(
-          FlutterError(code: "CONVERSION_ERROR", message: "Błąd konwersji ikony", details: nil))
+          FlutterError(code: "CONVERSION_ERROR", message: "Icon conversion error", details: nil))
         return
       }
 
@@ -60,7 +60,7 @@ public class FlutterFileInfoPlugin: NSObject, FlutterPlugin {
     guard let args = call.arguments as? [String: Any],
       let path = args["filePath"] as? String
     else {
-      result(FlutterError(code: "INVALID_ARGS", message: "Brak ścieżki pliku", details: nil))
+      result(FlutterError(code: "INVALID_ARGS", message: "No file path", details: nil))
       return
     }
 
