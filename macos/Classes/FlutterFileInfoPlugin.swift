@@ -21,7 +21,7 @@ public class FlutterFileInfoPlugin: NSObject, FlutterPlugin {
       let url = URL(fileURLWithPath: path)
       let icon = NSWorkspace.shared.icon(forFile: url.path)
 
-      let newSize = NSSize(width: 256, height: 256)
+      let newSize = NSSize(width: 128, height: 128)
       let resizedIcon = self.resize(image: icon, to: newSize)
 
       guard let tiffData = resizedIcon.tiffRepresentation,
@@ -35,13 +35,21 @@ public class FlutterFileInfoPlugin: NSObject, FlutterPlugin {
 
       let response: [String: Any] = [
         "pixelData": FlutterStandardTypedData(bytes: pngData),
-        "width": Int(icon.size.width),
-        "height": Int(icon.size.height),
+        "width": Int(newSize.width),
+        "height": Int(newSize.height),
       ]
 
       result(response)
     } else {
       result(FlutterMethodNotImplemented)
     }
+  }
+
+  private func resize(image: NSImage, to newSize: NSSize) -> NSImage {
+    let newImage = NSImage(size: newSize)
+    newImage.lockFocus()
+    image.draw(in: NSRect(origin: .zero, size: newSize))
+    newImage.unlockFocus()
+    return newImage
   }
 }
