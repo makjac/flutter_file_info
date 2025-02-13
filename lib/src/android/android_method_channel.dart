@@ -9,13 +9,6 @@ import 'package:flutter_file_info/flutter_file_info.dart';
 /// This class provides a common interface for interacting with Android platform-specific code
 /// through method channels. It serves as a base class for implementing specific Android method channels.
 /// Subclasses should override the methods defined in this class to provide platform-specific functionality.
-///
-/// Example usage:
-/// ```dart
-/// class MyAndroidMethodChannel extends AndroidMethodChannel {
-///   // Implement platform-specific methods here
-/// }
-/// ```
 abstract class AndroidMethodChannel {
   /// Retrieves the icon information for a file located at the specified [filePath].
   ///
