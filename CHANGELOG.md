@@ -15,3 +15,12 @@
 * feat: `AndroidFileAttributes` enum for Android-specific file permissions
 * refactor: Renamed `attributes` to `winAttributes` in `FileMetadata`
 * feat: Added `androidAttributes` for Android-specific attributes in `FileMetadata`
+
+## 0.1.1
+
+* Correct image URLs in `README.md`
+
+## 0.2.0
+
+* feat: Support for MacOS platform. Methods `getFileInfo` and `getFileIconInfo` now work on MacOS
+* feat: `MacosFileAttribute` enum for MacOS-specific file attributes
