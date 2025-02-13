@@ -76,11 +76,6 @@ public class FlutterFileInfoPlugin: NSObject, FlutterPlugin {
       attributes["fileName"] = url.lastPathComponent
       attributes["fileExtension"] = url.pathExtension
 
-      attributes["creationTime"] =
-        (fileAttributes[.creationDate] as? Date)?.timeIntervalSince1970.milliseconds
-      attributes["modifiedTime"] =
-        (fileAttributes[.modificationDate] as? Date)?.timeIntervalSince1970.milliseconds
-
       let sizeBytes = fileAttributes[.size] as? Int
       attributes["sizeBytes"] = sizeBytes
 
@@ -91,31 +86,60 @@ public class FlutterFileInfoPlugin: NSObject, FlutterPlugin {
         attributes["fileSize"] = formatter.string(fromByteCount: Int64(bytes))
       }
 
-      if let uti = UTTypeCreatePreferredIdentifierForTag(
-        kUTTagClassFilenameExtension,
-        url.pathExtension as CFString,
-        nil
-      )?.takeRetainedValue() {
-        attributes["fileType"] = UTTypeCopyDescription(uti)?.takeRetainedValue() as String?
+      if #available(macOS 11.0, *) {
+        if let fileExtension = url.pathExtension.isEmpty ? nil : url.pathExtension,
+          let uti = UTType(filenameExtension: fileExtension)
+        {
+          attributes["fileType"] = uti.localizedDescription ?? "Unknown"
+        }
+      } else {
+        attributes["fileType"] = "N/A"
       }
 
       let resourceValues = try url.resourceValues(forKeys: [
+        .isApplicationKey,
+        .applicationIsScriptableKey,
+        .isPackageKey,
         .isHiddenKey,
+        .isReadableKey,
+        .isWritableKey,
+        .isSystemImmutableKey,
+        .isUserImmutableKey,
+        .isExcludedFromBackupKey,
         .isDirectoryKey,
         .isRegularFileKey,
         .isSymbolicLinkKey,
+        .isMountTriggerKey,
         .isVolumeKey,
-        .isPackageKey,
-        .isApplicationKey,
+        .isAliasFileKey,
+        .creationDateKey,
+        .contentModificationDateKey,
+        .contentAccessDateKey,
       ])
 
+      attributes["creationTime"] = resourceValues.creationDate?.timeIntervalSince1970.milliseconds
+      attributes["modifiedTime"] =
+        resourceValues.contentModificationDate?.timeIntervalSince1970.milliseconds
+      attributes["accessedTime"] =
+        resourceValues.contentAccessDate?.timeIntervalSince1970.milliseconds
+
+      if resourceValues.isApplication == true { macosAttributes.append("application") }
+      if resourceValues.applicationIsScriptable == true { macosAttributes.append("scriptable") }
+      if resourceValues.isPackage == true { macosAttributes.append("package") }
       if resourceValues.isHidden == true { macosAttributes.append("hidden") }
+      if resourceValues.isReadable == true { macosAttributes.append("readable") }
+      if resourceValues.isWritable == true { macosAttributes.append("writable") }
+      if resourceValues.isSystemImmutable == true { macosAttributes.append("systemImmutable") }
+      if resourceValues.isUserImmutable == true { macosAttributes.append("userImmutable") }
+      if resourceValues.isExcludedFromBackup == true {
+        macosAttributes.append("excludedFromBackup")
+      }
       if resourceValues.isDirectory == true { macosAttributes.append("directory") }
       if resourceValues.isRegularFile == true { macosAttributes.append("regularFile") }
       if resourceValues.isSymbolicLink == true { macosAttributes.append("symbolicLink") }
+      if resourceValues.isMountTrigger == true { macosAttributes.append("mountTrigger") }
       if resourceValues.isVolume == true { macosAttributes.append("volume") }
-      if resourceValues.isPackage == true { macosAttributes.append("package") }
-      if resourceValues.isApplication == true { macosAttributes.append("application") }
+      if resourceValues.isAliasFile == true { macosAttributes.append("aliasFile") }
 
       if let posixPermissions = fileAttributes[.posixPermissions] as? Int {
         if posixPermissions & 0o200 == 0 { macosAttributes.append("readOnly") }
