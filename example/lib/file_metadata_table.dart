@@ -32,6 +32,8 @@ class FileMetadataTable extends StatelessWidget {
       return mtadata?.winAttributes?.map((e) => e.name).join(', ');
     } else if (platform == TargetPlatform.android) {
       return mtadata?.androidAttributes?.map((e) => e.name).join(', ');
+    } else if (platform == TargetPlatform.macOS) {
+      return mtadata?.macosAttributes?.map((e) => e.name).join(', ');
     } else {
       return null;
     }

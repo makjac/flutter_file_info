@@ -4,8 +4,8 @@
 # This file should be version controlled and should not be manually edited.
 
 version:
-  revision: "761747bfc538b5af34aa0d3fac380f1bc331ec49"
-  channel: "stable"
+  revision: "fc011960a2b3260d49b64823b90fe292440c78ee"
+  channel: "[user-branch]"
 
 project_type: plugin
 
@@ -13,14 +13,17 @@ project_type: plugin
 migration:
   platforms:
     - platform: root
-      create_revision: 761747bfc538b5af34aa0d3fac380f1bc331ec49
-      base_revision: 761747bfc538b5af34aa0d3fac380f1bc331ec49
+      create_revision: fc011960a2b3260d49b64823b90fe292440c78ee
+      base_revision: fc011960a2b3260d49b64823b90fe292440c78ee
     - platform: android
-      create_revision: 761747bfc538b5af34aa0d3fac380f1bc331ec49
-      base_revision: 761747bfc538b5af34aa0d3fac380f1bc331ec49
+      create_revision: fc011960a2b3260d49b64823b90fe292440c78ee
+      base_revision: fc011960a2b3260d49b64823b90fe292440c78ee
+    - platform: macos
+      create_revision: fc011960a2b3260d49b64823b90fe292440c78ee
+      base_revision: fc011960a2b3260d49b64823b90fe292440c78ee
     - platform: windows
-      create_revision: 761747bfc538b5af34aa0d3fac380f1bc331ec49
-      base_revision: 761747bfc538b5af34aa0d3fac380f1bc331ec49
+      create_revision: fc011960a2b3260d49b64823b90fe292440c78ee
+      base_revision: fc011960a2b3260d49b64823b90fe292440c78ee
 
   # User provided section
 

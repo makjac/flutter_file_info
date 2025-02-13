@@ -18,8 +18,8 @@ A Flutter plugin for retrieving detailed file metadata, including native icons. 
 
 | API                   | Android            | iOS                | Linux              | macOS              | Windows            | Web                |
 | --------------------- | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| getFileIconInfo()     | :heavy_check_mark: | :x:                | :x:                | :x:                | :heavy_check_mark: | :x:                |
-| getFileInfo()         | :heavy_check_mark: | :x:                | :x:                | :x:                | :heavy_check_mark: | :x:                |
+| getFileIconInfo()     | :heavy_check_mark: | :x:                | :x:                | :heavy_check_mark: | :heavy_check_mark: | :x:                |
+| getFileInfo()         | :heavy_check_mark: | :x:                | :x:                | :heavy_check_mark: | :heavy_check_mark: | :x:                |
 
 ## Getting Started
 
@@ -62,6 +62,10 @@ if (_fileMetatdata != null) {
 
 ![windows_example][windows_example_url]
 
+## MacOS
+
+![macos_example][macos_example_url]
+
 ### Android
 
 ![android_example][android_example_url]
@@ -93,4 +97,5 @@ This plugin is licensed under the [MIT License][mit_license_url].
 
 [header_image_url]: https://raw.githubusercontent.com/makjac/images/refs/heads/main/flutter_file_info/flutter_file_info_banner.png
 [windows_example_url]: https://raw.githubusercontent.com/makjac/images/refs/heads/main/flutter_file_info/file_info_win.gif
+[macos_example_url]: https://raw.githubusercontent.com/makjac/images/refs/heads/main/flutter_file_info/macos_flutter_file_info.gif
 [android_example_url]: https://raw.githubusercontent.com/makjac/images/refs/heads/main/flutter_file_info/flutter_file_info_android.gif

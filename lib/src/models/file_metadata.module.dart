@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_file_info/flutter_file_info.dart';
+import 'package:flutter_file_info/src/macos/enum/macos_file_attribute.dart';
 
 class FileMetadata extends Equatable {
   /// The full path of the file.
@@ -38,6 +39,9 @@ class FileMetadata extends Equatable {
   /// The list of Android file attributes.
   final List<AndroidFileAttributes>? androidAttributes;
 
+  /// The list of macOS file attributes.
+  final List<MacosFileAttribute>? macosAttributes;
+
   /// Represents the metadata of a file.
   ///
   /// This class contains information about the attributes of a file.
@@ -58,6 +62,7 @@ class FileMetadata extends Equatable {
     this.dwFileAttributes,
     this.winAttributes,
     this.androidAttributes,
+    this.macosAttributes,
   });
 
   /// Returns a string representation of the [FileMetadata] object.
@@ -74,7 +79,8 @@ class FileMetadata extends Equatable {
       'fileSize: $fileSize, '
       'dwFileAttributes: $dwFileAttributes, '
       'winAttributes: $winAttributes, '
-      'androidAttributes: $androidAttributes)';
+      'androidAttributes: $androidAttributes, '
+      'macosAttributes: $macosAttributes )';
 
   /// Creates a new [FileMetadata] object with updated values based on the provided parameters.
   ///
@@ -92,6 +98,7 @@ class FileMetadata extends Equatable {
     int? dwFileAttributes,
     List<WindowsFileAttributes>? winAttributes,
     List<AndroidFileAttributes>? androidAttributes,
+    List<MacosFileAttribute>? macosAttributes,
   }) {
     return FileMetadata(
       filePath: filePath ?? this.filePath,
@@ -106,6 +113,7 @@ class FileMetadata extends Equatable {
       dwFileAttributes: dwFileAttributes ?? this.dwFileAttributes,
       winAttributes: winAttributes ?? this.winAttributes,
       androidAttributes: androidAttributes ?? this.androidAttributes,
+      macosAttributes: macosAttributes ?? this.macosAttributes,
     );
   }
 
@@ -124,5 +132,6 @@ class FileMetadata extends Equatable {
         dwFileAttributes,
         winAttributes,
         androidAttributes,
+        macosAttributes,
       ];
 }
