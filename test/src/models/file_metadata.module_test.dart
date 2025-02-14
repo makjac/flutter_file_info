@@ -102,7 +102,9 @@ void main() {
         'modifiedTime: 2023-08-12 00:00:00.000, accessedTime: 2023-08-13 00:00:00.000, '
         'sizeBytes: 1024, fileSize: 1 KB, dwFileAttributes: ${FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_READONLY}, '
         'winAttributes: [WindowsFileAttributes.READ_ONLY, WindowsFileAttributes.HIDDEN], '
-        'androidAttributes: null)',
+        'androidAttributes: null, '
+        'macosAttributes: null, '
+        'iosAttributes: null )',
       );
     });
 
