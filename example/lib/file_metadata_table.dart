@@ -21,7 +21,11 @@ class FileMetadataTable extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(value ?? ''),
+          child: Text(
+            value ?? '',
+            maxLines: 5,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ],
     );
@@ -34,6 +38,8 @@ class FileMetadataTable extends StatelessWidget {
       return mtadata?.androidAttributes?.map((e) => e.name).join(', ');
     } else if (platform == TargetPlatform.macOS) {
       return mtadata?.macosAttributes?.map((e) => e.name).join(', ');
+    } else if (platform == TargetPlatform.iOS) {
+      return mtadata?.iosAttributes?.map((e) => e.name).join(', ');
     } else {
       return null;
     }

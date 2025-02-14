@@ -38,7 +38,6 @@ class AndroidMethodChannelImpl implements AndroidMethodChannel {
 
     final String base64Image = data['pixelData'] as String;
 
-    // Ensure base64Image is a valid base64 string
     final Uint8List pixelData;
     try {
       pixelData =
@@ -84,7 +83,6 @@ class AndroidMethodChannelImpl implements AndroidMethodChannel {
           AndroidFileAttributesUtility.parseAndroidFileAttributes(
                   List<String>.from(data['androidAttributes'] as List<dynamic>))
               .toList(),
-      // Note: winAttributes is not being set here. You may need to handle it similarly if needed.
     );
   }
 }

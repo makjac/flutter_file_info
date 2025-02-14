@@ -66,13 +66,15 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _buildButtons(),
-            FileIcon(iconInfo: _iconInfo),
-            FileMetadataTable(fileMetadata: _fileMetadata),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _buildButtons(),
+              FileIcon(iconInfo: _iconInfo),
+              FileMetadataTable(fileMetadata: _fileMetadata),
+            ],
+          ),
         ),
       ),
     );

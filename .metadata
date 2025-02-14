@@ -18,6 +18,9 @@ migration:
     - platform: android
       create_revision: fc011960a2b3260d49b64823b90fe292440c78ee
       base_revision: fc011960a2b3260d49b64823b90fe292440c78ee
+    - platform: ios
+      create_revision: fc011960a2b3260d49b64823b90fe292440c78ee
+      base_revision: fc011960a2b3260d49b64823b90fe292440c78ee
     - platform: macos
       create_revision: fc011960a2b3260d49b64823b90fe292440c78ee
       base_revision: fc011960a2b3260d49b64823b90fe292440c78ee

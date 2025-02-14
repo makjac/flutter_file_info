@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_file_info/flutter_file_info.dart';
+import 'package:flutter_file_info/src/ios/enum/ios_file_attribute.dart';
 import 'package:flutter_file_info/src/macos/enum/macos_file_attribute.dart';
 
 class FileMetadata extends Equatable {
@@ -42,6 +43,9 @@ class FileMetadata extends Equatable {
   /// The list of macOS file attributes.
   final List<MacosFileAttribute>? macosAttributes;
 
+  /// The list of iOS file attributes.
+  final List<IosFileAttribute>? iosAttributes;
+
   /// Represents the metadata of a file.
   ///
   /// This class contains information about the attributes of a file.
@@ -63,6 +67,7 @@ class FileMetadata extends Equatable {
     this.winAttributes,
     this.androidAttributes,
     this.macosAttributes,
+    this.iosAttributes,
   });
 
   /// Returns a string representation of the [FileMetadata] object.
@@ -80,7 +85,8 @@ class FileMetadata extends Equatable {
       'dwFileAttributes: $dwFileAttributes, '
       'winAttributes: $winAttributes, '
       'androidAttributes: $androidAttributes, '
-      'macosAttributes: $macosAttributes )';
+      'macosAttributes: $macosAttributes, '
+      'iosAttributes: $iosAttributes )';
 
   /// Creates a new [FileMetadata] object with updated values based on the provided parameters.
   ///
@@ -99,6 +105,7 @@ class FileMetadata extends Equatable {
     List<WindowsFileAttributes>? winAttributes,
     List<AndroidFileAttributes>? androidAttributes,
     List<MacosFileAttribute>? macosAttributes,
+    List<IosFileAttribute>? iosAttributes,
   }) {
     return FileMetadata(
       filePath: filePath ?? this.filePath,
@@ -114,6 +121,7 @@ class FileMetadata extends Equatable {
       winAttributes: winAttributes ?? this.winAttributes,
       androidAttributes: androidAttributes ?? this.androidAttributes,
       macosAttributes: macosAttributes ?? this.macosAttributes,
+      iosAttributes: iosAttributes ?? this.iosAttributes,
     );
   }
 
@@ -133,5 +141,6 @@ class FileMetadata extends Equatable {
         winAttributes,
         androidAttributes,
         macosAttributes,
+        iosAttributes,
       ];
 }
