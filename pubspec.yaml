@@ -32,6 +32,9 @@ flutter:
         package: com.ecoala.flutter_file_info
         pluginClass: FlutterFileInfoPlugin
         dartPluginClass: FileInfoAndroid
+      ios:
+        pluginClass: FlutterFileInfoPlugin
+        dartPluginClass: FileInfoIOS
       windows:
         dartPluginClass: FileInfoWindows
       macos:
