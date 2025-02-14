@@ -10,3 +10,4 @@ export 'src/android/enum/android_file_attribiutes.dart';
 export 'src/android/file_info_android.dart' show FileInfoAndroid;
 export 'src/windows/file_info_windows.dart' show FileInfoWindows;
 export 'src/macos/file_info_macos.dart' show FileInfoMacOS;
+export 'src/ios/file_info_ios.dart' show FileInfoIOS;
