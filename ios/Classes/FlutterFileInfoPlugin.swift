@@ -39,17 +39,7 @@ public class FlutterFileInfoPlugin: NSObject, FlutterPlugin {
   private func generateIconData(path: String, result: @escaping FlutterResult) {
     let fileURL = URL(fileURLWithPath: path)
 
-    guard let uti = getFileUTI(fileURL: fileURL) else {
-      result(
-        FlutterError(
-          code: "FILE_TYPE_ERROR",
-          message: "Could not determine file type",
-          details: nil
-        ))
-      return
-    }
-
-    guard let iconImage = getSystemIcon(uti: uti) else {
+    guard let iconImage = UIImage.icon(forFileURL: fileURL, preferredSize: .largest) else {
       result(
         FlutterError(
           code: "ICON_GENERATION_ERROR",
@@ -60,38 +50,6 @@ public class FlutterFileInfoPlugin: NSObject, FlutterPlugin {
     }
 
     prepareResponseData(image: iconImage, result: result)
-  }
-
-  private func getFileUTI(fileURL: URL) -> String? {
-    if #available(iOS 14.0, *) {
-      return try? fileURL.resourceValues(forKeys: [.contentTypeKey])
-        .contentType?
-        .identifier
-    } else {
-      let ext = fileURL.pathExtension as CFString
-      return UTTypeCreatePreferredIdentifierForTag(
-        kUTTagClassFilenameExtension,
-        ext,
-        nil
-      )?.takeRetainedValue() as String?
-    }
-  }
-
-  private func getSystemIcon(uti: String) -> UIImage? {
-
-    guard
-      let fileExtension = UTTypeCopyPreferredTagWithClass(
-        uti as CFString,
-        kUTTagClassFilenameExtension
-      )?.takeRetainedValue() as String?
-    else {
-      return UIImage(systemName: "doc")
-    }
-
-    let dummyURL = URL(fileURLWithPath: "file.\(fileExtension)")
-    let controller = UIDocumentInteractionController(url: dummyURL)
-
-    return controller.icons.last ?? UIImage(systemName: "doc")
   }
 
   private func prepareResponseData(image: UIImage, result: @escaping FlutterResult) {
@@ -114,5 +72,24 @@ public class FlutterFileInfoPlugin: NSObject, FlutterPlugin {
     ]
 
     result(response)
+  }
+}
+
+extension UIImage {
+  public enum FileIconSize {
+    case smallest
+    case largest
+  }
+
+  public class func icon(forFileURL fileURL: URL, preferredSize: FileIconSize = .smallest)
+    -> UIImage?
+  {
+    let myInteractionController = UIDocumentInteractionController(url: fileURL)
+    let allIcons = myInteractionController.icons
+
+    switch preferredSize {
+    case .smallest: return allIcons.first!
+    case .largest: return allIcons.last!
+    }
   }
 }
