@@ -15,6 +15,8 @@ public class FlutterFileInfoPlugin: NSObject, FlutterPlugin {
     switch call.method {
     case "getFileIcon":
       handleGetIcon(call, result: result)
+    case "getFileInfo":
+      handleGetMetadata(call, result: result)
     default:
       result(FlutterMethodNotImplemented)
     }
@@ -72,6 +74,115 @@ public class FlutterFileInfoPlugin: NSObject, FlutterPlugin {
     ]
 
     result(response)
+  }
+
+  private func handleGetMetadata(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+    guard let args = call.arguments as? [String: Any],
+      let filePath = args["filePath"] as? String
+    else {
+      result(
+        FlutterError(
+          code: "INVALID_ARGS",
+          message: "Missing or invalid file path",
+          details: nil
+        ))
+      return
+    }
+
+    let fileURL = URL(fileURLWithPath: filePath)
+    let fileManager = FileManager.default
+
+    guard fileManager.fileExists(atPath: filePath) else {
+      result(
+        FlutterError(
+          code: "FILE_NOT_FOUND",
+          message: "File does not exist",
+          details: nil
+        ))
+      return
+    }
+
+    do {
+      let attributes = try fileManager.attributesOfItem(atPath: filePath)
+      let resourceValues = try fileURL.resourceValues(forKeys: [
+        .nameKey,
+        .localizedNameKey,
+        .pathKey,
+        .creationDateKey,
+        .contentModificationDateKey,
+        .contentAccessDateKey,
+        .fileSizeKey,
+        .typeIdentifierKey,
+        .isApplicationKey,
+        .isPackageKey,
+        .isHiddenKey,
+        .isReadableKey,
+        .isWritableKey,
+        .isSystemImmutableKey,
+        .isUserImmutableKey,
+        .isExcludedFromBackupKey,
+        .isDirectoryKey,
+        .isRegularFileKey,
+        .isSymbolicLinkKey,
+        .isMountTriggerKey,
+        .isVolumeKey,
+        .isAliasFileKey,
+      ])
+
+      let metadata: [String: Any?] = [
+        "filePath": filePath,
+        "fileName": resourceValues.name,
+        "fileExtension": fileURL.pathExtension,
+        "fileType": resourceValues.typeIdentifier,
+        "creationTime": resourceValues.creationDate.map { Int($0.timeIntervalSince1970 * 1000) },
+        "modifiedTime": resourceValues.contentModificationDate.map {
+          Int($0.timeIntervalSince1970 * 1000)
+        },
+        "accessedTime": resourceValues.contentAccessDate.map {
+          Int($0.timeIntervalSince1970 * 1000)
+        },
+        "sizeBytes": resourceValues.fileSize,
+        "fileSize": formatFileSize(resourceValues.fileSize ?? 0),
+        "iOSAttributes": getIOSAttributes(resourceValues: resourceValues),
+      ]
+
+      result(metadata)
+    } catch {
+      result(
+        FlutterError(
+          code: "METADATA_ERROR",
+          message: "Failed to retrieve file metadata: \(error.localizedDescription)",
+          details: nil
+        ))
+    }
+  }
+
+  private func formatFileSize(_ sizeBytes: Int) -> String {
+    let formatter = ByteCountFormatter()
+    formatter.allowedUnits = [.useBytes, .useKB, .useMB, .useGB]
+    formatter.countStyle = .file
+    return formatter.string(fromByteCount: Int64(sizeBytes))
+  }
+
+  private func getIOSAttributes(resourceValues: URLResourceValues) -> [String] {
+    var attributes: [String] = []
+
+    if resourceValues.isApplication == true { attributes.append("application") }
+    if resourceValues.isPackage == true { attributes.append("package") }
+    if resourceValues.isHidden == true { attributes.append("hidden") }
+    if resourceValues.isReadable == true { attributes.append("readable") }
+    if resourceValues.isWritable == true { attributes.append("writable") }
+    if resourceValues.isSystemImmutable == true { attributes.append("systemImmutable") }
+    if resourceValues.isUserImmutable == true { attributes.append("userImmutable") }
+    if resourceValues.isExcludedFromBackup == true { attributes.append("excludedFromBackup") }
+    if resourceValues.isDirectory == true { attributes.append("directory") }
+    if resourceValues.isRegularFile == true { attributes.append("regularFile") }
+    if resourceValues.isSymbolicLink == true { attributes.append("symbolicLink") }
+    if resourceValues.isMountTrigger == true { attributes.append("mountTrigger") }
+    if resourceValues.isVolume == true { attributes.append("volume") }
+    if resourceValues.isAliasFile == true { attributes.append("aliasFile") }
+
+    return attributes
   }
 }
 
