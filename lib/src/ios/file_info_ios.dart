@@ -19,7 +19,6 @@ class FileInfoIOS extends FileInfo {
 
   @override
   Future<FileMetadata?> getFileInfo(String filePath) async {
-    throw UnimplementedError('getFileInfo() has not been implemented.');
-    // return await _iOSMethodChannel.getFileInfo(filePath);
+    return await _iOSMethodChannel.getFileInfo(filePath);
   }
 }
