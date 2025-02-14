@@ -1,3 +1,8 @@
+## 0.3.0
+
+* feat: Support for iOS platform. Methods `getFileInfo` and `getFileIconInfo` now work on iOS
+* feat: `IosFileAttribute` enum for iOS-specific file attributes
+
 ## 0.2.0
 
 * feat: Support for MacOS platform. Methods `getFileInfo` and `getFileIconInfo` now work on MacOS
