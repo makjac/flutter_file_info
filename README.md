@@ -7,9 +7,9 @@
 
 # flutter_file_info
 
-A Flutter plugin for retrieving detailed file metadata, including native icons. Ideal for applications needing file information and icons.
+A Flutter plugin for retrieving detailed file metadata, including system-native file icons. You can retrieve the native icon assigned to a file based on its type, ensuring a consistent visual representation across platforms. Perfect for applications that require access to file details and icons.
 
-## Currently supported features
+## Features
 
 * Access to native file icons.
 * Retrieval of detailed file metadata.
@@ -18,8 +18,35 @@ A Flutter plugin for retrieving detailed file metadata, including native icons. 
 
 | API                   | Android            | iOS                | Linux              | macOS              | Windows            | Web                |
 | --------------------- | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| getFileIconInfo()     | :heavy_check_mark: | :x:                | :x:                | :heavy_check_mark: | :heavy_check_mark: | :x:                |
-| getFileInfo()         | :heavy_check_mark: | :x:                | :x:                | :heavy_check_mark: | :heavy_check_mark: | :x:                |
+| getFileIconInfo()     | :heavy_check_mark: | :heavy_check_mark: | :x:                | :heavy_check_mark: | :heavy_check_mark: | :x:                |
+| getFileInfo()         | :heavy_check_mark: | :heavy_check_mark: | :x:                | :heavy_check_mark: | :heavy_check_mark: | :x:                |
+
+## iOS Deployment Target
+
+This plugin requires a minimum iOS deployment target of 13.0.
+Ensure that your project is configured correctly by following these steps:
+
+  1. **Update the `Podfile`**
+
+      In the `ios/Podfile` file, set the deployment target:
+
+      ```podfile
+      platform :ios, '13.0'
+      ```
+
+      After making this change, run:
+
+      ```bash
+      cd ios && pod install
+      ```
+
+  2. **Update Xcode Project Settings**
+
+      1. Open your project in Xcode (ios/Runner.xcworkspace).
+      2. Navigate to Runner → General.
+      3. In the Deployment Info section, set iOS Deployment Target to 13.0.
+
+  These steps ensure that your project is compatible with the required iOS version.
 
 ## Getting Started
 
@@ -30,24 +57,24 @@ Quick simple usage example:
 #### Get icon info
 
 ```dart
-IconInfo? _iconInfo = await FileInfo.instance.getFileIconInfo('path/to/example/file.txt');
+IconInfo? iconInfo = await FileInfo.instance.getFileIconInfo('path/to/example/file.txt');
 
 Widget _buildFileIcon() {
-    if (_iconInfo == null) return const SizedBox.shrink();
+    if (iconInfo == null) return const SizedBox.shrink();
     return Image.memory(
-      _iconInfo!.pixelData,
-      width: _iconInfo!.width.toDouble(),
-      height: _iconInfo!.height.toDouble(),
+      iconInfo!.pixelData,
+      width: iconInfo!.width.toDouble(),
+      height: iconInfo!.height.toDouble(),
     );
   }
 ```
 
-#### Fet file info
+#### Get file info
 
 ```dart
-FileMetadata? _fileMetatdata = await FileInfo.instance.getFileInfo('path/to/example/file.txt');
+FileMetadata? fileMetadata = await FileInfo.instance.getFileInfo('path/to/example/file.txt');
 
-if (_fileMetatdata != null) {
+if (fileMetadata != null) {
     print(fileMetadata.fileName);                    // Output: file.txt
     print(fileMetadata.fileExtension);               // Output: txt
     print(fileMetadata.fileType);                    // Output: TextDocument
@@ -66,6 +93,10 @@ if (_fileMetatdata != null) {
 
 ![macos_example][macos_example_url]
 
+### iOS
+
+![ios_example][ios_example_url]
+
 ### Android
 
 ![android_example][android_example_url]
@@ -77,7 +108,6 @@ If you would like to contribute to the development of this plugin, please fork t
 ## License
 
 This plugin is licensed under the [MIT License][mit_license_url].
-
 
 <!-- end:excluded_rules_table -->
 
@@ -99,3 +129,4 @@ This plugin is licensed under the [MIT License][mit_license_url].
 [windows_example_url]: https://raw.githubusercontent.com/makjac/images/refs/heads/main/flutter_file_info/file_info_win.gif
 [macos_example_url]: https://raw.githubusercontent.com/makjac/images/refs/heads/main/flutter_file_info/macos_flutter_file_info.gif
 [android_example_url]: https://raw.githubusercontent.com/makjac/images/refs/heads/main/flutter_file_info/flutter_file_info_android.gif
+[ios_example_url]: https://raw.githubusercontent.com/makjac/images/refs/heads/main/flutter_file_info/ios_flutter_file_info.gif
